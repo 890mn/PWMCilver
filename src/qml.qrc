@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>App.qml</file>
+        <file>asset/BrushGrunge.ttf</file>
+        <file>asset/MonaspaceKrypton-Medium.otf</file>
+        <file>asset/SmileySans-Oblique.ttf</file>
+        <file>layout/InitialLayout.qml</file>
+        <file>layout/SimulationLayout.qml</file>
+        <file>canvas/SimulationCanvas.qml</file>
+        <file>component/IndoorSettings.qml</file>
+        <file>component/LightSettings.qml</file>
+        <file>component/SensorSettings.qml</file>
+        <file>section/BottomSection.qml</file>
+        <file>section/RightSection.qml</file>
+        <file>section/TopSection.qml</file>
+    </qresource>
+</RCC>
