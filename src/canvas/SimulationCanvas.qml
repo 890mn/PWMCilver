@@ -36,7 +36,7 @@ Rectangle {
             }
             illuminanceMatrix.push(row);
         }
-        console.log("Illuminance Matrix Initialized:", illuminanceMatrix);
+        //console.log("Illuminance Matrix Initialized:", illuminanceMatrix);
     }
 
     function updateIlluminanceMatrix() {
@@ -178,8 +178,8 @@ Rectangle {
                     ctx.arc(x, y, pointRadius, 0, 2 * Math.PI);
                     ctx.fill();
 
-                    console.log(initialIlluminance);
-                    console.log(`Illuminance at (${i};, ${j}): ${scaledIlluminance}, Color: ${color}`);
+                    //console.log(initialIlluminance);
+                    //console.log(`Illuminance at (${i};, ${j}): ${scaledIlluminance}, Color: ${color}`);
                 }
             }
 

@@ -19,47 +19,66 @@ Item {
     Column {
         id: mainState
         anchors.left: parent.left
-        anchors.leftMargin: 10
-        spacing: 15
+        anchors.leftMargin: 20
+        spacing: 20
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: 100
-
         opacity: 1
 
         FluText {
-            text: qsTr("仿真 · 照度模拟")
-            color: Qt.rgba(87/255,151/255,180/255,255/255)
-            font.pixelSize: mainWindow.height / 11
+            text: qsTr("平面建模定位系统")
+            color: cosTTextColor
+            font.pixelSize: mainWindow.height / 10
             font.family: smileFont.name
         }
 
         Row {
+            x: 60
+
             FluText {
-                text: qsTr("调控算法验证平台 |")
-                color: globalTextColor
-                font.pixelSize: mainWindow.height / 18
+                text: qsTr("避障反馈调控平台 |")
+                color: cosSTextColor
+                font.pixelSize: mainWindow.height / 17
                 font.family: smileFont.name
             }
             FluText {
                 anchors.bottom: parent.bottom
                 text: qsTr(" Powered By Qt6")
                 color: globalTextColor
-                font.pixelSize: mainWindow.height / 22
+                font.pixelSize: mainWindow.height / 21
                 font.family: smileFont.name
             }
         }
 
-        Row {
+        Column {
             id: buttonRow
-            spacing: 20
+            spacing: 10
             baselineOffset: 20
-            FluFilledButton {
-                id: startSimButton
-                text: qsTr("开始仿真 / Start")
-                font.pixelSize: mainWindow.height / 22
+
+            FluButton {
+                id: blutoothButton
+                text: qsTr("链接设备 / BthLink")
+                normalColor: Qt.rgba(245/255,245/255,245/255,255/255)
+                hoverColor: Qt.rgba(255/255,255/255,255/255,255/255)
+                textColor: cosTTextColor
+                font.pixelSize: mainWindow.height / 20
                 font.family: smileFont.name
-                implicitWidth: font.pixelSize * text.length * 0.65
-                implicitHeight: font.pixelSize * 1.7
+                implicitWidth: font.pixelSize * text.length * 0.55
+                implicitHeight: font.pixelSize * 1.67
+
+                onClicked: {
+
+                }
+            }
+            FluButton {
+                id: startSimButton
+                text: qsTr("进入 / Start")
+                normalColor: Qt.rgba(245/255,245/255,245/255,255/255)
+                hoverColor: Qt.rgba(255/255,255/255,255/255,255/255)
+                textColor: cosTTextColor
+                font.pixelSize: mainWindow.height / 20
+                font.family: smileFont.name
+                implicitWidth: font.pixelSize * text.length * 0.5
+                implicitHeight: font.pixelSize * 1.67
 
                 onClicked: {
                     startSimulation()
@@ -67,9 +86,9 @@ Item {
             }
             FluFilledButton {
                 text: qsTr("环境设置 / Setting")
-                font.pixelSize: mainWindow.height / 22
+                font.pixelSize: mainWindow.height / 21
                 font.family: smileFont.name
-                implicitWidth: font.pixelSize * text.length * 0.6
+                implicitWidth: font.pixelSize * text.length * 0.55
                 implicitHeight: font.pixelSize * 1.7
                 onClicked: {
                     sheet.open(FluSheetType.Top)
@@ -353,7 +372,7 @@ Item {
 
             FluFilledButton {
                 text: qsTr("检查更新 / Check for Update")
-                font.pixelSize: mainWindow.height / 22
+                font.pixelSize: mainWindow.height / 21
                 font.family: smileFont.name
                 implicitWidth: font.pixelSize * text.length * 0.5
                 implicitHeight: font.pixelSize * 1.7
@@ -378,7 +397,7 @@ Item {
                 message: "Current Version is the Lastest. Click yes for more detail."
 
                 onPositiveClicked: {
-                    Qt.openUrlExternally("https://github.com/890mn/CSilver/releases");
+                    Qt.openUrlExternally("https://github.com/890mn/PWMCilver/releases");
                 }
             }
 
@@ -409,13 +428,13 @@ Item {
             color: globalTextColor
             font.family: smileFont.name
             font.bold: true
-            text: qsTr("愿你在仿真的世界沐浴五束阳光 |")
+            text: qsTr("愿你在上位机的世界沐浴五束阳光 |")
         }
         FluText{
             font.pixelSize: mainWindow.height / 30
             font.family: smileFont.name
             font.bold: true
-            text: " CSDLighting-Silver.0.4 Release    "
+            text: " PWMC-DisDection.0.1 Release    "
             color: Qt.rgba(87/255,151/255,180/255,255/255)
         }
     }

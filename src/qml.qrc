@@ -14,5 +14,7 @@
         <file>section/BottomSection.qml</file>
         <file>section/RightSection.qml</file>
         <file>section/TopSection.qml</file>
+        <file>asset/back.jpg</file>
+        <file>asset/logo.ico</file>
     </qresource>
 </RCC>

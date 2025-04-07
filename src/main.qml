@@ -11,10 +11,10 @@ FluWindow {
     minimumHeight: 422
     title: qsTr("PWMCilver")
 
-    property color globalTextColor: "black"
+    property color globalTextColor: "white"
     property color cosFTextColor: Qt.rgba(87/255,151/255,180/255,255/255)
     property color cosSTextColor: Qt.rgba(43/255,186/255,180/255,255/255)
-    property color cosTTextColor: Qt.rgba(143/255,16/255,180/255,205/255)
+    property color cosTTextColor: Qt.rgba(200/255,166/255,166/255,255/255)
 
     FontLoader {
         id: brushFont
@@ -29,14 +29,14 @@ FluWindow {
     // 背景换成白色纯色背景
     Rectangle {
         anchors.fill: parent
-/*
+
         Image{
-            source: "qrc:/asset/back.png"
+            source: "qrc:/asset/back.jpg"
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
-            opacity: 0.7
+            opacity: 0.95
         }
-*/
+
         InitialLayout {
             id: initialLayout
             anchors.fill: parent

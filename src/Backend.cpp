@@ -11,7 +11,7 @@ Backend::Backend(QObject *parent) : QObject(parent), networkManager(new QNetwork
 
 void Backend::checkForUpdates()
 {
-    QUrl releasesUrl("https://github.com/890mn/CSilver/releases/");
+    QUrl releasesUrl("https://github.com/890mn/PWMCilver/releases");
 
     QNetworkRequest request(releasesUrl);
     request.setHeader(QNetworkRequest::UserAgentHeader, "CSDL-UpdateChecker");
@@ -34,7 +34,7 @@ void Backend::onReplyFinished(QNetworkReply* reply)
 
     if (match.hasMatch()) {
         QString latestVersion = match.captured(1);
-        QString releaseUrl = "https://github.com/890mn/CSilver/releases/tag/" + latestVersion;
+        QString releaseUrl = "https://github.com/890mn/PWMCilver/releases/tag/" + latestVersion;
 
         QString currentVersion = PROJECT_VERSION;
         if (latestVersion > currentVersion) {

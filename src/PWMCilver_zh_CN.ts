@@ -56,13 +56,17 @@
 <context>
     <name>InitialLayout</name>
     <message>
-        <location filename="layout/InitialLayout.qml" line="30"/>
-        <source>仿真 · 照度模拟</source>
+        <source>PWMCilver</source>
+        <translation type="obsolete">PWMCilver</translation>
+    </message>
+    <message>
+        <location filename="layout/InitialLayout.qml" line="28"/>
+        <source>平面建模定位系统</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="layout/InitialLayout.qml" line="38"/>
-        <source>调控算法验证平台 |</source>
+        <source>避障反馈调控平台 |</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -71,83 +75,90 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="58"/>
-        <source>开始仿真 / Start</source>
+        <location filename="layout/InitialLayout.qml" line="74"/>
+        <source>进入 / Start</source>
+        <oldsource>进入系统 / Start</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="69"/>
+        <location filename="layout/InitialLayout.qml" line="59"/>
+        <source>链接设备 / BthLink</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="layout/InitialLayout.qml" line="88"/>
         <source>环境设置 / Setting</source>
+        <oldsource>环境设置|Setting</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="92"/>
+        <location filename="layout/InitialLayout.qml" line="111"/>
         <source>软件环境设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="105"/>
+        <location filename="layout/InitialLayout.qml" line="124"/>
         <source>- CSilver 软件最小宽度 / 长度 [不建议小于默认数值]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="139"/>
+        <location filename="layout/InitialLayout.qml" line="158"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="181"/>
+        <location filename="layout/InitialLayout.qml" line="200"/>
         <source>- 坐标轴 / 室内设定 颜色设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="203"/>
+        <location filename="layout/InitialLayout.qml" line="222"/>
         <source>- 光源 颜色设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="225"/>
+        <location filename="layout/InitialLayout.qml" line="244"/>
         <source>- 传感 颜色设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="242"/>
+        <location filename="layout/InitialLayout.qml" line="261"/>
         <source>仿真环境设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="255"/>
+        <location filename="layout/InitialLayout.qml" line="274"/>
         <source>- 是否开启竖向滑块？[建议：在多光源或传感存在时打开，默认关闭]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="276"/>
+        <location filename="layout/InitialLayout.qml" line="295"/>
         <source>- 光源数量限制 [Default: 8] [注:不建议新设定数值小于原数量，该行为将引发未定义事件]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="318"/>
+        <location filename="layout/InitialLayout.qml" line="337"/>
         <source>- 传感数量限制 [Default: 8] [注:不建议新设定数值小于原数量，该行为将引发未定义事件]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="355"/>
+        <location filename="layout/InitialLayout.qml" line="374"/>
         <source>检查更新 / Check for Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="367"/>
+        <location filename="layout/InitialLayout.qml" line="386"/>
         <source>有新版本！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="377"/>
+        <location filename="layout/InitialLayout.qml" line="396"/>
         <source>已经是最新版本</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="412"/>
-        <source>愿你在仿真的世界沐浴五束阳光 |</source>
+        <location filename="layout/InitialLayout.qml" line="431"/>
+        <source>愿你在上位机的世界沐浴五束阳光 |</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
