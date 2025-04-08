@@ -11,10 +11,22 @@ FluWindow {
     minimumHeight: 422
     title: qsTr("PWMCilver")
 
-    property color globalTextColor: "white"
-    property color cosFTextColor: Qt.rgba(87/255,151/255,180/255,255/255)
-    property color cosSTextColor: Qt.rgba(43/255,186/255,180/255,255/255)
-    property color cosTTextColor: Qt.rgba(200/255,166/255,166/255,255/255)
+    property color globalTextColor: Qt.rgba(245/255,245/255,245/255,255/255)
+
+    property color colorBlue: Qt.rgba(87/255,151/255,180/255,255/255)
+    property color colorBlueHover: Qt.rgba(77/255,141/255,170/255,255/255)
+
+    property color colorGreen: Qt.rgba(43/255,186/255,180/255,255/255)
+    property color colorGreenHover: Qt.rgba(33/255,176/255,170/255,255/255)
+
+    property color colorPink: Qt.rgba(200/255,166/255,166/255,255/255)
+    property color colorPinkHover: Qt.rgba(190/255,156/255,156/255,255/255)
+
+    property color colorWhiteHover: Qt.rgba(255/255,255/255,255/255,255/255)
+    property color colorWhite: Qt.rgba(245/255,245/255,245/255,255/255)
+
+    property color colorGrayHover: Qt.rgba(98/255, 90/255, 96/255, 255/255)
+    property color colorGray: Qt.rgba(88/255, 80/255, 86/255, 255/255)
 
     FontLoader {
         id: brushFont
@@ -51,7 +63,7 @@ FluWindow {
             visible: false
             onReturnToHome: {
                 returnAnimation.start()
-            }
+        }
         }
 
         SequentialAnimation {

@@ -12,7 +12,7 @@ Rectangle {
 
     property alias lightSources: lightList.model
     Component.onCompleted: {
-        simulationCanvas.lightSources = lightSources;
+        //simulationCanvas.lightSources = lightSources;
     }
 
     function updateHeight() {
@@ -76,7 +76,7 @@ Rectangle {
                 height: model.expanded ? 180 : 50
                 radius: 5
                 border.width: 2
-                border.color: cosSTextColor
+                border.color: colorGreen
                 color: "transparent"
 
                 Column {

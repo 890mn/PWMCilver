@@ -13,7 +13,7 @@ Rectangle {
     property alias sensorListModel: sensorListView.model
 
     Component.onCompleted: {
-        simulationCanvas.sensorSources = sensorListModel; // 绑定外部模型
+        //simulationCanvas.sensorSources = sensorListModel; // 绑定外部模型
     }
 
     function updateHeight() {
@@ -77,7 +77,7 @@ Rectangle {
                 height: model.expanded ? 140 : 50
                 radius: 5
                 border.width: 2
-                border.color: cosTTextColor
+                border.color: colorPink
                 color: "transparent"
 
                 Column {

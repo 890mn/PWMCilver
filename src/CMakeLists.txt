@@ -16,8 +16,8 @@ else()
     set(APPLICATION_DIR_PATH ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 endif()
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick Bluetooth)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Bluetooth)
 
 find_program(QT_LUPDATE NAMES lupdate)
 find_program(QT_LRELEASE NAMES lrelease)
@@ -41,8 +41,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(${PROJECT_NAME}
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        Backend.cpp
-        Backend.h
+        BluetoothSerial.h
+        BluetoothSerial.cpp
+
+
     )
 else()
     add_executable(${PROJECT_NAME}
@@ -55,7 +57,9 @@ add_dependencies(${PROJECT_NAME} Script-UpdateTranslations)
 target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Quick
+    Qt${QT_VERSION_MAJOR}::Bluetooth
     fluentuiplugin
+
 )
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)

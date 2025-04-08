@@ -3,7 +3,6 @@
         <file>main.qml</file>
         <file>App.qml</file>
         <file>asset/BrushGrunge.ttf</file>
-        <file>asset/MonaspaceKrypton-Medium.otf</file>
         <file>asset/SmileySans-Oblique.ttf</file>
         <file>layout/InitialLayout.qml</file>
         <file>layout/SimulationLayout.qml</file>

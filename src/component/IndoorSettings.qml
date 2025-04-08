@@ -37,7 +37,7 @@ Rectangle {
             height: 110
             radius: 5
             border.width: 2
-            border.color: cosFTextColor
+            border.color: colorBlue
             color: "transparent"
 
             Column {

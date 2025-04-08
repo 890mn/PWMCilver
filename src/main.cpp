@@ -3,7 +3,7 @@
 #include <QTranslator>
 #include <QQmlContext>
 #include <qicon.h>
-#include "Backend.h"
+#include "BluetoothSerial.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,10 +22,9 @@ int main(int argc, char *argv[])
         }
     }
 
-    QQmlApplicationEngine engine;
+    qmlRegisterType<BluetoothSerial>("Custom.Bluetooth", 1, 0, "BluetoothSerial");
 
-    Backend backend;
-    engine.rootContext()->setContextProperty("backend", &backend);
+    QQmlApplicationEngine engine;
 
     const QUrl url(QStringLiteral("qrc:/App.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
