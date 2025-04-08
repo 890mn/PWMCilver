@@ -3,7 +3,7 @@
 #include <QTranslator>
 #include <QQmlContext>
 #include <qicon.h>
-#include "BluetoothSerial.h"
+#include "blecontroller.h"
 
 int main(int argc, char *argv[])
 {
@@ -21,10 +21,9 @@ int main(int argc, char *argv[])
             break;
         }
     }
-
-    qmlRegisterType<BluetoothSerial>("Custom.Bluetooth", 1, 0, "BluetoothSerial");
-
     QQmlApplicationEngine engine;
+    BLEController ble;
+    engine.rootContext()->setContextProperty("BLE", &ble);
 
     const QUrl url(QStringLiteral("qrc:/App.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

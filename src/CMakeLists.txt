@@ -41,8 +41,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(${PROJECT_NAME}
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        BluetoothSerial.h
-        BluetoothSerial.cpp
+        blecontroller.h
+        blecontroller.cpp
+        blemanager.h
+        blemanager.cpp
 
 
     )

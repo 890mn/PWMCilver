@@ -1,32 +1,22 @@
 #pragma once
 
 #include <QObject>
-#include <QBluetoothSocket>
-#include <QBluetoothDeviceDiscoveryAgent>
-#include <QBluetoothServiceInfo>
+#include "blemanager.h"
 
-class BluetoothSerial : public QObject
+class BLEController : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool connected READ isConnected NOTIFY connectedChanged)
 public:
-    explicit BluetoothSerial(QObject *parent = nullptr);
+    explicit BLEController(QObject *parent = nullptr);
+    Q_INVOKABLE void connectToTargetDevice();
 
-    Q_INVOKABLE void connectToDevice(const QString &address);
-    Q_INVOKABLE void disconnectDevice();
-    Q_INVOKABLE void startDiscovery();
+    bool isConnected() const { return m_connected; }
 
 signals:
-    void dataReceived(const QString &data);
-    void statusChanged(const QString &status);
-    void serviceFound(const QString &name, const QString &address);
-
-private slots:
-    void onConnected();
-    void onDisconnected();
-    void onReadyRead();
-    void onDeviceDiscovered(const QBluetoothDeviceInfo &info);
+    void connectedChanged(bool connected);
 
 private:
-    QBluetoothSocket *socket;
-    QBluetoothDeviceDiscoveryAgent *discoveryAgent;
+    BLEManager *manager;
+    bool m_connected = false;
 };

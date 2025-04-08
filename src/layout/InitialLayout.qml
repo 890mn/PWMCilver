@@ -118,15 +118,14 @@ Item {
                 implicitHeight: font.pixelSize * 1.67
 
                 onClicked: {
-                    bthLinked = !bthLinked
-                    if(!bthLinked) {
-                        blutoothButton.normalColor = colorWhite
-                        blutoothButton.hoverColor = colorWhiteHover
-                        blutoothButton.textColor = colorPink
-                    } else {
-                        blutoothButton.normalColor = colorWhite
-                        blutoothButton.hoverColor = colorWhiteHover
-                        blutoothButton.textColor = colorGray
+                    BLE.connectToTargetDevice()
+                }
+
+                Connections {
+                    target: BLE
+                    function onConnectedChanged() {
+                        bthLinked = BLE.connected
+                        blutoothButton.textColor = bthLinked ? colorGray : colorPink
                     }
                 }
             }
