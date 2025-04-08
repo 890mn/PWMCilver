@@ -18,6 +18,7 @@ signals:
     void deviceDiscovered(const QString &name, const QBluetoothDeviceInfo &info);
     void connected();
     void readyToWrite();
+    void messageReceived(const QString &message);
 
 private:
     QBluetoothDeviceDiscoveryAgent *discoveryAgent = nullptr;

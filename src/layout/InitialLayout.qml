@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
-import QtQuick.Controls 2.15
 import FluentUI 1.0
 
 Item {
@@ -337,119 +336,6 @@ Item {
                     height: 25
                     onAccepted: {
                         mainWindow.colorPink = current
-                    }
-                }
-            }
-
-            // Simulation
-            FluText {
-                y: 10
-                text: qsTr("仿真环境设置")
-                font.family: smileFont.name
-                font.pixelSize: 23
-            }
-
-            Row {
-                width: parent.width
-
-                spacing: 20
-                padding: 5
-                x: 15
-
-                FluText {
-                    text: qsTr("- 是否开启竖向滑块？[建议：在多光源或传感存在时打开，默认关闭]")
-                    font.family: smileFont.name
-                    font.pixelSize: 21
-                }
-
-                FluToggleSwitch {
-                    y: 4
-                    onClicked: {
-                        verOn = !verOn
-                    }
-                }
-            }
-
-            Row {
-                width: parent.width
-
-                spacing: 20
-                padding: 5
-                x: 15
-
-                FluText {
-                    text: qsTr("- 光源数量限制 [Default: 8] [注:不建议新设定数值小于原数量，该行为将引发未定义事件]")
-                    font.family: smileFont.name
-                    font.pixelSize: 21
-                }
-
-                FluTextBox {
-                    text: maxLight.toFixed(0)
-                    font.pixelSize: 16
-                    font.family: smileFont.name
-                    width: 70
-                    height: 30
-                    y: -2
-                    inputMethodHints: Qt.ImhDigitsOnly
-
-                    onEditingFinished: {
-                        let newValue = parseInt(text);
-                        if (!isNaN(newValue) && newValue >= 0 && newValue <= 32) {
-                            maxLight = newValue;
-                        } else {
-                            text = maxLight;
-                        }
-                    }
-
-                    Keys.onReturnPressed: {
-                        let newValue = parseInt(text);
-                        if (!isNaN(newValue) && newValue >= 0 && newValue <= 32) {
-                            maxLight = newValue;
-                        } else {
-                            text = maxLight;
-                        }
-                    }
-                }
-            }
-
-            Row {
-                width: parent.width
-
-                spacing: 20
-                padding: 5
-                x: 15
-
-                FluText {
-                    text: qsTr("- 传感数量限制 [Default: 8] [注:不建议新设定数值小于原数量，该行为将引发未定义事件]")
-                    font.family: smileFont.name
-                    font.pixelSize: 21
-                }
-
-                FluTextBox {
-                    text: maxSensor.toFixed(0)
-                    font.pixelSize: 16
-                    font.family: smileFont.name
-                    width: 70
-                    height: 30
-                    y: -2
-                    inputMethodHints: Qt.ImhDigitsOnly
-
-                    onEditingFinished: {
-                        let newValue = parseInt(text);
-                        if (!isNaN(newValue) && newValue >= 0 && newValue <= 32) {
-                            maxSensor = newValue;
-                        } else {
-                            text = maxSensor;
-                        }
-                    }
-
-                    Keys.onReturnPressed: {
-                        let newValue = parseInt(text);
-                        if (!isNaN(newValue) && newValue >= 0 && newValue <= 32) {
-                            maxSensor = newValue;
-                        } else {
-                            text = maxSensor;
-                        }
                     }
                 }
             }

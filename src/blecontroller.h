@@ -15,6 +15,7 @@ public:
 
 signals:
     void connectedChanged(bool connected);
+    void messageReceived(const QString &message);
 
 private:
     BLEManager *manager;

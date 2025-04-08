@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import QtQuick.Controls 2.15
 import FluentUI
 
 Rectangle {
@@ -14,13 +15,25 @@ Rectangle {
     property real rectWidth: 500 // 矩形宽度
     property real rectHeight: 300 // 矩形高度
 
-    Canvas {
-        id: canvas
+    TextArea {
+        id: debugConsole
         anchors.fill: parent
+        readOnly: true
+        text: "调试输出：\n"
+        font.family: smileFont.name
+        font.pixelSize: 21
 
-        onPaint: {
-            var ctx = getContext("2d");
-            ctx.clearRect(0, 0, width, height); // 清空画布
+        Connections {
+            target: BLE
+            function onMessageReceived(message) {
+                let now = new Date();
+                let timestamp = now.toLocaleTimeString(); // 输出形如 "14:35:08"
+                let log = "[" + timestamp + "] " + message;
+
+                console.log("QML 收到数据:", log);
+                debugConsole.text += log + "\n";
+                debugConsole.cursorPosition = debugConsole.length; // 自动滚动到底
+            }
         }
     }
 }

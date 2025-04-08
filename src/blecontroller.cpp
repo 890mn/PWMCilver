@@ -5,6 +5,9 @@ BLEController::BLEController(QObject *parent) : QObject(parent)
 {
     manager = new BLEManager(this);
 
+    connect(manager, &BLEManager::messageReceived,
+            this, &BLEController::messageReceived);
+
     connect(manager, &BLEManager::readyToWrite, this, [=]() {
         m_connected = true;
         emit connectedChanged(m_connected);
