@@ -14,6 +14,7 @@ Item {
     property int maxSensor: 8
 
     property bool bthLinked: false
+    property bool bthLoading: false
 
     Rectangle {
         width: parent.width
@@ -117,7 +118,12 @@ Item {
                 implicitHeight: font.pixelSize * 1.67
 
                 onClicked: {
-                    BLE.connectToTargetDevice()
+                    if (!bthLinked) {
+                        bthLoading = true // ✅ 开始加载
+                        BLE.connectToTargetDevice()
+                    } else {
+                        bthLoading = false // ✅ 已连接/断开时隐藏
+                    }
                 }
 
                 Connections {
@@ -147,6 +153,16 @@ Item {
                 }
             }
         }
+    }
+
+    FluProgressBar {
+        id: bleLoadingBar
+        anchors.centerIn: parent
+        width: 150
+        visible: bthLoading
+        indeterminate: true
+        strokeWidth: 6
+        //progressVisible: true
     }
 
     Row {

@@ -43,11 +43,9 @@ void BLEManager::connectToDevice(const QBluetoothDeviceInfo &info)
         }
 
         connect(service, &QLowEnergyService::stateChanged, this, [=](QLowEnergyService::ServiceState s) {
-            if (s == QLowEnergyService::ServiceDiscovered) {
+            if (s == QLowEnergyService::RemoteServiceDiscovered) {
                 qDebug() << "服务详情发现完毕，可以开始通信";
                 emit readyToWrite();
-
-                /*** 👇 我们添加的数据接收逻辑开始 ***/
 
                 for (const QLowEnergyCharacteristic &ch : service->characteristics()) {
                     if (ch.uuid().toString().contains("ffe1", Qt::CaseInsensitive)) {
@@ -71,8 +69,6 @@ void BLEManager::connectToDevice(const QBluetoothDeviceInfo &info)
                         break; // 找到后就退出循环
                     }
                 }
-
-                /*** 👆 添加逻辑结束 ***/
             }
         });
 
