@@ -13,7 +13,7 @@ Item {
     property int maxLight: 8
     property int maxSensor: 8
 
-    property bool bthLinked: false
+    property bool bthLinked: true
     property bool bthLoading: false
 
     Rectangle {
@@ -102,7 +102,7 @@ Item {
         Column {
             id: buttonRow
             spacing: 15
-            y: 18
+            y: 5
 
             FluButton {
                 id: blutoothButton
@@ -134,6 +134,17 @@ Item {
                     }
                 }
             }
+
+            FluProgressBar {
+                id: bleLoadingBar
+                //anchors.centerIn: parent
+                width: 200
+                visible: bthLoading
+                //indeterminate: false
+                strokeWidth: 6
+                progressVisible: true
+            }
+
             FluButton {
                 id: startSimButton
                 text: qsTr("❯ Start")
@@ -153,16 +164,6 @@ Item {
                 }
             }
         }
-    }
-
-    FluProgressBar {
-        id: bleLoadingBar
-        anchors.centerIn: parent
-        width: 150
-        visible: bthLoading
-        indeterminate: true
-        strokeWidth: 6
-        //progressVisible: true
     }
 
     Row {

@@ -77,7 +77,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="139"/>
+        <location filename="layout/InitialLayout.qml" line="150"/>
         <source>❯ Start</source>
         <oldsource>2/ Start</oldsource>
         <translation type="unfinished"></translation>
@@ -99,37 +99,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="212"/>
+        <location filename="layout/InitialLayout.qml" line="213"/>
         <source>软件环境设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="225"/>
+        <location filename="layout/InitialLayout.qml" line="226"/>
         <source>- CSilver 软件最小宽度 / 长度 [不建议小于默认数值]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="259"/>
+        <location filename="layout/InitialLayout.qml" line="260"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="301"/>
+        <location filename="layout/InitialLayout.qml" line="302"/>
         <source>- 坐标轴 / 室内设定 颜色设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="323"/>
+        <location filename="layout/InitialLayout.qml" line="324"/>
         <source>- 光源 颜色设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="345"/>
+        <location filename="layout/InitialLayout.qml" line="346"/>
         <source>- 传感 颜色设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="179"/>
+        <location filename="layout/InitialLayout.qml" line="180"/>
         <source>愿你在上位机的世界沐浴五束阳光 |</source>
         <translation type="unfinished"></translation>
     </message>

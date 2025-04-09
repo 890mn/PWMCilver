@@ -27,12 +27,18 @@ Rectangle {
             target: BLE
             function onMessageReceived(message) {
                 let now = new Date();
-                let timestamp = now.toLocaleTimeString(); // 输出形如 "14:35:08"
+                let timestamp = now.toLocaleTimeString();
                 let log = "[" + timestamp + "] " + message;
 
-                console.log("QML 收到数据:", log);
                 debugConsole.text += log + "\n";
-                debugConsole.cursorPosition = debugConsole.length; // 自动滚动到底
+
+                // 👉 强制光标移到最后
+                debugConsole.cursorPosition = debugConsole.text.length;
+
+                // 👉 滚动到底部（尤其适配 Fluent 风格时更稳）
+                Qt.callLater(() => {
+                    debugConsole.positionViewAtEnd();
+                });
             }
         }
     }
