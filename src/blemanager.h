@@ -12,6 +12,7 @@ class BLEManager : public QObject
 public:
     explicit BLEManager(QObject *parent = nullptr);
     void startScan();
+    void stopScan();
     void connectToDevice(const QBluetoothDeviceInfo &info);
 
 signals:

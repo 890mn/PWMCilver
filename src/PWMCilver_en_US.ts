@@ -25,112 +25,85 @@
     </message>
 </context>
 <context>
-    <name>IndoorSettings</name>
-    <message>
-        <location filename="component/IndoorSettings.qml" line="20"/>
-        <source>室内环境</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/IndoorSettings.qml" line="27"/>
-        <source>     平面宽/高 [%1] x [%2] ( cm )</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/IndoorSettings.qml" line="54"/>
-        <source>宽度 X   </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/IndoorSettings.qml" line="69"/>
-        <location filename="component/IndoorSettings.qml" line="115"/>
-        <source>     平面宽/高 [%1] x [%2] ( Unit: cm )</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/IndoorSettings.qml" line="100"/>
-        <source>长度 Y   </source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>InitialLayout</name>
     <message>
-        <location filename="layout/InitialLayout.qml" line="77"/>
-        <source>平面建模定位系统</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="layout/InitialLayout.qml" line="87"/>
-        <source>避障反馈调控平台 |</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="layout/InitialLayout.qml" line="94"/>
-        <source> Powered By Qt6</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="layout/InitialLayout.qml" line="109"/>
-        <source>❮ 链接设备 / BthLink</source>
-        <oldsource>U+276E 链接设备 / BthLink</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="layout/InitialLayout.qml" line="150"/>
-        <source>❯ Start</source>
-        <oldsource>2/ Start</oldsource>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="layout/InitialLayout.qml" line="35"/>
+        <location filename="layout/InitialLayout.qml" line="47"/>
         <source>环境设置 / Setting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="45"/>
+        <location filename="layout/InitialLayout.qml" line="57"/>
         <source>更新说明 / Update Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="56"/>
+        <location filename="layout/InitialLayout.qml" line="68"/>
         <source>PWMCilver</source>
-        <oldsource>[Github] PWMCilver</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="213"/>
+        <location filename="layout/InitialLayout.qml" line="89"/>
+        <source>平面建模定位系统</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="layout/InitialLayout.qml" line="99"/>
+        <source>避障反馈调控平台 |</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="layout/InitialLayout.qml" line="106"/>
+        <source> Powered By Qt6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="layout/InitialLayout.qml" line="184"/>
+        <source>❯ Start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="layout/InitialLayout.qml" line="214"/>
+        <source>愿你在上位机的世界沐浴五束阳光 |</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="layout/InitialLayout.qml" line="247"/>
         <source>软件环境设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="226"/>
+        <location filename="layout/InitialLayout.qml" line="260"/>
         <source>- CSilver 软件最小宽度 / 长度 [不建议小于默认数值]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="260"/>
+        <location filename="layout/InitialLayout.qml" line="294"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="302"/>
+        <location filename="layout/InitialLayout.qml" line="336"/>
         <source>- 坐标轴 / 室内设定 颜色设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="324"/>
+        <location filename="layout/InitialLayout.qml" line="358"/>
         <source>- 光源 颜色设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="346"/>
+        <location filename="layout/InitialLayout.qml" line="380"/>
         <source>- 传感 颜色设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="180"/>
-        <source>愿你在上位机的世界沐浴五束阳光 |</source>
+        <location filename="layout/InitialLayout.qml" line="397"/>
+        <source>仿真环境设置</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="layout/InitialLayout.qml" line="410"/>
+        <source>- 是否开启竖向滑块？[建议：在多光源或传感存在时打开，默认关闭]</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

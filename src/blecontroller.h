@@ -10,12 +10,12 @@ class BLEController : public QObject
 public:
     explicit BLEController(QObject *parent = nullptr);
     Q_INVOKABLE void connectToTargetDevice();
-
     bool isConnected() const { return m_connected; }
 
 signals:
     void connectedChanged(bool connected);
     void messageReceived(const QString &message);
+    void deviceConnected();
 
 private:
     BLEManager *manager;

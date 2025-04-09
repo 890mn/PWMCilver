@@ -15,5 +15,6 @@
         <file>section/TopSection.qml</file>
         <file>asset/back.jpg</file>
         <file>asset/logo.ico</file>
+        <file>canvas/DebugConsole.qml</file>
     </qresource>
 </RCC>

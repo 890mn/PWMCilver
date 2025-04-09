@@ -13,14 +13,26 @@ Item {
     property int maxLight: 8
     property int maxSensor: 8
 
-    property bool bthLinked: true
+    property bool bthLinked: false
     property bool bthLoading: false
+
+    property bool isConnecting: false
+    property bool isConnected: false
+
+    property int connectStep: 0
+    property var connectMessages: [
+        "开始搜索设备…",
+        "正在扫描蓝牙信号…",
+        "发现设备，正在连接…",
+        "建立安全通道…",
+        "连接成功！"
+    ]
 
     Rectangle {
         width: parent.width
         height: 230
         opacity: 0.8
-        color: Qt.rgba(85/255,120/255,155/255,195/255)
+        color: Qt.rgba(105/255,120/255,155/255,185/255)
         radius: 8
         anchors.centerIn: parent
     }
@@ -106,7 +118,7 @@ Item {
 
             FluButton {
                 id: blutoothButton
-                text: qsTr("❮ 链接设备 / BthLink")
+                text: "❮ 链接设备 / BthLink "
 
                 normalColor: colorWhite
                 hoverColor: colorWhiteHover
@@ -114,15 +126,25 @@ Item {
 
                 font.pixelSize: mainWindow.height / 20
                 font.family: smileFont.name
-                implicitWidth: font.pixelSize * text.length * 0.5
+                implicitWidth: font.pixelSize * "❮ 链接设备 / BthLink ".length * 0.5
                 implicitHeight: font.pixelSize * 1.67
 
+                FluProgressBar {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    y: parent.height - 5
+                    visible: isConnecting
+                    width: parent.width - 8
+                    height: 3
+                }
+
                 onClicked: {
-                    if (!bthLinked) {
-                        bthLoading = true // ✅ 开始加载
+                    if (!isConnected && !isConnecting) {
+                        isConnecting = true
+                        connectStep = 0
+                        blutoothButton.text = connectMessages[0]
+                        connectSimTimer.start()
+
                         BLE.connectToTargetDevice()
-                    } else {
-                        bthLoading = false // ✅ 已连接/断开时隐藏
                     }
                 }
 
@@ -132,17 +154,29 @@ Item {
                         bthLinked = BLE.connected
                         blutoothButton.textColor = bthLinked ? colorGray : colorPink
                     }
+                    function onDeviceConnected() {
+                        isConnected = true
+                        isConnecting = false
+                        connectSimTimer.stop()
+                        blutoothButton.text = "✔ 已连接"
+                        console.log("已连接设备！")
+                    }
                 }
             }
 
-            FluProgressBar {
-                id: bleLoadingBar
-                //anchors.centerIn: parent
-                width: 200
-                visible: bthLoading
-                //indeterminate: false
-                strokeWidth: 6
-                progressVisible: true
+            Timer {
+                id: connectSimTimer
+                interval: 2500 // 每步间隔时间
+                repeat: true
+                running: false
+                onTriggered: {
+                    if (connectStep < connectMessages.length - 1) {
+                        connectStep += 1
+                        blutoothButton.text = connectMessages[connectStep]
+                    } else {
+                        connectSimTimer.stop()
+                    }
+                }
             }
 
             FluButton {
@@ -353,6 +387,35 @@ Item {
                     height: 25
                     onAccepted: {
                         mainWindow.colorPink = current
+                    }
+                }
+            }
+
+            // Simulation
+            FluText {
+                y: 10
+                text: qsTr("仿真环境设置")
+                font.family: smileFont.name
+                font.pixelSize: 23
+            }
+
+            Row {
+                width: parent.width
+
+                spacing: 20
+                padding: 5
+                x: 15
+
+                FluText {
+                    text: qsTr("- 是否开启竖向滑块？[建议：在多光源或传感存在时打开，默认关闭]")
+                    font.family: smileFont.name
+                    font.pixelSize: 21
+                }
+
+                FluToggleSwitch {
+                    y: 4
+                    onClicked: {
+                        verOn = !verOn
                     }
                 }
             }

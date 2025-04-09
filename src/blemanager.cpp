@@ -19,6 +19,11 @@ void BLEManager::startScan()
     discoveryAgent->start();
 }
 
+void BLEManager::stopScan()
+{
+    discoveryAgent->stop();
+}
+
 void BLEManager::connectToDevice(const QBluetoothDeviceInfo &info)
 {
     if (controller)
