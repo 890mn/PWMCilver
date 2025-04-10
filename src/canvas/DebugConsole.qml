@@ -21,36 +21,52 @@ Rectangle {
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: 4
-        //padding: 8
+        spacing: 6
 
-        // 顶部栏（带标题和按钮）
+
         RowLayout {
             Layout.fillWidth: true
+            height: 68
+            spacing: 16
 
             FluText {
+                Layout.fillWidth: true
                 text: "🧪 调试终端"
                 font.pixelSize: 20
                 font.family: smileFont.name
                 color: FluTheme.primaryColor
+                leftPadding: 12
                 Layout.alignment: Qt.AlignVCenter
             }
 
-            Item { Layout.fillWidth: true }
+            // 右侧按钮区
+            RowLayout {
+                spacing: 12
+                Layout.alignment: Qt.AlignVCenter
 
-            FluButton {
-                text: "Clear"
-
-                onClicked: {
-                    debugText.text = "调试输出：\n"
-                    consoleRoot.clearRequested()
+                FluButton {
+                    text: "Clear"
+                    font.pixelSize: 16
+                    font.family: smileFont.name
+                    implicitWidth: font.pixelSize * text.length * 0.7
+                    implicitHeight: parent.height
+                    verticalPadding: 6
+                    onClicked: {
+                        debugText.text = "调试输出：\n"
+                        consoleRoot.clearRequested()
+                    }
                 }
-            }
 
-            FluToggleSwitch {
-                checked: true
-                text: "自动滚动"
-                onCheckedChanged: consoleRoot.autoScroll = checked
+                FluToggleSwitch {
+                    Layout.alignment: Qt.AlignVCenter
+                    checked: true
+                    text: "自动滚动"
+                    font.family: smileFont.name
+                    font.pixelSize: 16
+                    height: parent.height * 0.75
+                    rightPadding: 6
+                    onCheckedChanged: consoleRoot.autoScroll = checked
+                }
             }
         }
 
