@@ -4,22 +4,25 @@
 <context>
     <name>BottomSection</name>
     <message>
-        <location filename="section/BottomSection.qml" line="19"/>
-        <source>区块 1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="section/BottomSection.qml" line="30"/>
-        <source>区块 2</source>
+        <location filename="section/BottomSection.qml" line="23"/>
+        <source>BT: Connected / Good</source>
+        <oldsource>BT: Connected</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="section/BottomSection.qml" line="41"/>
-        <source>区块 3</source>
+        <source>Power: 80% / 3.7V</source>
+        <oldsource>Power: 80%</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="section/BottomSection.qml" line="51"/>
+        <location filename="section/BottomSection.qml" line="59"/>
+        <source>MCU: Ready / v0.1.0</source>
+        <oldsource>MCU: Ready</oldsource>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="section/BottomSection.qml" line="69"/>
         <source>返回主页 / Back</source>
         <translation type="unfinished"></translation>
     </message>
@@ -80,87 +83,6 @@
     <message>
         <location filename="layout/InitialLayout.qml" line="293"/>
         <source>X</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>LightSettings</name>
-    <message>
-        <location filename="component/LightSettings.qml" line="37"/>
-        <source>光源设置</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/LightSettings.qml" line="44"/>
-        <source>+</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/LightSettings.qml" line="92"/>
-        <source>-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/LightSettings.qml" line="112"/>
-        <source>CLOSE  ⮃</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/LightSettings.qml" line="112"/>
-        <source>OPEN   ⮃</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/LightSettings.qml" line="150"/>
-        <source>照度 Lux</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/LightSettings.qml" line="205"/>
-        <source>位置 X    </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/LightSettings.qml" line="260"/>
-        <source>位置 Y    </source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SensorSettings</name>
-    <message>
-        <location filename="component/SensorSettings.qml" line="40"/>
-        <source>传感器设置</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/SensorSettings.qml" line="47"/>
-        <source>+</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/SensorSettings.qml" line="93"/>
-        <source>-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/SensorSettings.qml" line="114"/>
-        <source>CLOSE  ⮃</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/SensorSettings.qml" line="114"/>
-        <source>OPEN   ⮃</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/SensorSettings.qml" line="151"/>
-        <source>位置 X    </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="component/SensorSettings.qml" line="211"/>
-        <source>位置 Y    </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

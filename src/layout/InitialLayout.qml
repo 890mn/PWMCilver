@@ -29,7 +29,7 @@ Item {
 
     Rectangle {
         width: parent.width
-        height: 230
+        height: mainWindow.height * 0.4
         opacity: 0.8
         color: Qt.rgba(105/255,120/255,155/255,185/255)
         radius: 8
@@ -73,11 +73,11 @@ Item {
         }
     }
 
-    Row {
+    RowLayout {
         anchors.left: parent.left
         anchors.leftMargin: 30
         anchors.verticalCenter: parent.verticalCenter
-        spacing: 140
+        spacing: mainWindow.width * 0.15
 
         Column {
             id: mainState

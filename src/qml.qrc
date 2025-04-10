@@ -7,14 +7,12 @@
         <file>layout/InitialLayout.qml</file>
         <file>layout/SimulationLayout.qml</file>
         <file>canvas/SimulationCanvas.qml</file>
-        <file>component/IndoorSettings.qml</file>
-        <file>component/LightSettings.qml</file>
-        <file>component/SensorSettings.qml</file>
         <file>section/BottomSection.qml</file>
         <file>section/RightSection.qml</file>
         <file>section/TopSection.qml</file>
         <file>asset/back.jpg</file>
         <file>asset/logo.ico</file>
         <file>canvas/DebugConsole.qml</file>
+        <file>canvas/ControlPanel.qml</file>
     </qresource>
 </RCC>
