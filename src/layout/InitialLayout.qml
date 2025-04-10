@@ -24,8 +24,7 @@ Item {
         "开始搜索设备…",
         "正在扫描蓝牙信号…",
         "发现设备，正在连接…",
-        "建立安全通道…",
-        "连接成功！"
+        "建立安全通道…"
     ]
 
     Rectangle {
@@ -257,7 +256,7 @@ Item {
                 x: 15
 
                 FluText {
-                    text: qsTr("- CSilver 软件最小宽度 / 长度 [不建议小于默认数值]")
+                    text: qsTr("- PWMCilver 软件最小宽度 / 长度 [不建议小于默认数值]")
                     font.family: smileFont.name
                     font.pixelSize: 21
                 }
@@ -321,101 +320,6 @@ Item {
                         } else {
                             text = mainWindow.minimumHeight;
                         }
-                    }
-                }
-            }
-
-            Row {
-                width: parent.width
-
-                spacing: 20
-                padding: 5
-                x: 15
-
-                FluText {
-                    text: qsTr("- 坐标轴 / 室内设定 颜色设置")
-                    font.family: smileFont.name
-                    font.pixelSize: 21
-                }
-
-                FluColorPicker{
-                    width: 25
-                    height: 25
-                    onAccepted: {
-                        mainWindow.colorBlue = current
-                    }
-                }
-            }
-
-            Row {
-                width: parent.width
-
-                spacing: 20
-                padding: 5
-                x: 15
-
-                FluText {
-                    text: qsTr("- 光源 颜色设置")
-                    font.family: smileFont.name
-                    font.pixelSize: 21
-                }
-
-                FluColorPicker{
-                    width: 25
-                    height: 25
-                    onAccepted: {
-                        mainWindow.colorGreen = current
-                    }
-                }
-            }
-
-            Row {
-                width: parent.width
-
-                spacing: 20
-                padding: 5
-                x: 15
-
-                FluText {
-                    text: qsTr("- 传感 颜色设置")
-                    font.family: smileFont.name
-                    font.pixelSize: 21
-                }
-
-                FluColorPicker{
-                    width: 25
-                    height: 25
-                    onAccepted: {
-                        mainWindow.colorPink = current
-                    }
-                }
-            }
-
-            // Simulation
-            FluText {
-                y: 10
-                text: qsTr("仿真环境设置")
-                font.family: smileFont.name
-                font.pixelSize: 23
-            }
-
-            Row {
-                width: parent.width
-
-                spacing: 20
-                padding: 5
-                x: 15
-
-                FluText {
-                    text: qsTr("- 是否开启竖向滑块？[建议：在多光源或传感存在时打开，默认关闭]")
-                    font.family: smileFont.name
-                    font.pixelSize: 21
-                }
-
-                FluToggleSwitch {
-                    y: 4
-                    onClicked: {
-                        verOn = !verOn
                     }
                 }
             }

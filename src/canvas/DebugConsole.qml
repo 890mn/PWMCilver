@@ -23,10 +23,13 @@ Rectangle {
         anchors.fill: parent
         spacing: 6
 
+        Item {
+            Layout.preferredHeight: 4  // ✅ 下沉高度
+        }
 
         RowLayout {
             Layout.fillWidth: true
-            height: 68
+            height: 60
             spacing: 16
 
             FluText {
@@ -35,7 +38,7 @@ Rectangle {
                 font.pixelSize: 20
                 font.family: smileFont.name
                 color: FluTheme.primaryColor
-                leftPadding: 12
+                leftPadding: 6
                 Layout.alignment: Qt.AlignVCenter
             }
 
@@ -44,50 +47,59 @@ Rectangle {
                 spacing: 12
                 Layout.alignment: Qt.AlignVCenter
 
+                FluToggleSwitch {
+                    Layout.alignment: Qt.AlignVCenter
+                    checked: true
+                    height: parent.height * 0.75
+                    onCheckedChanged: consoleRoot.autoScroll = checked
+                }
+
                 FluButton {
                     text: "Clear"
                     font.pixelSize: 16
-                    font.family: smileFont.name
-                    implicitWidth: font.pixelSize * text.length * 0.7
-                    implicitHeight: parent.height
-                    verticalPadding: 6
+
+                    normalColor: colorWhite
+                    hoverColor: colorWhiteHover
+                    textColor: colorPink
+
+                    implicitWidth: font.pixelSize * text.length * 0.65
+                    implicitHeight: font.pixelSize * 1.3
+
                     onClicked: {
                         debugText.text = "调试输出：\n"
                         consoleRoot.clearRequested()
                     }
                 }
 
-                FluToggleSwitch {
-                    Layout.alignment: Qt.AlignVCenter
-                    checked: true
-                    text: "自动滚动"
-                    font.family: smileFont.name
-                    font.pixelSize: 16
-                    height: parent.height * 0.75
-                    rightPadding: 6
-                    onCheckedChanged: consoleRoot.autoScroll = checked
+                Item {
+                    Layout.preferredWidth: 4
                 }
             }
         }
 
-        // 滚动显示区域
         Flickable {
             id: flickArea
             Layout.fillWidth: true
             Layout.fillHeight: true
-            contentWidth: debugText.paintedWidth
-            contentHeight: debugText.paintedHeight
             clip: true
             interactive: true
+            contentWidth: debugText.paintedWidth
+            contentHeight: debugText.paintedHeight
 
             Text {
                 id: debugText
+                x: 6
                 text: "调试输出：\n"
                 wrapMode: Text.Wrap
-                width: flickArea.width
+                width: flickArea.width - 6
+                horizontalAlignment: Text.AlignLeft
                 font.family: smileFont.name
                 font.pixelSize: 18
             }
+        }
+
+        Item {
+            Layout.preferredHeight: 2  // ✅ 下沉高度
         }
     }
 
