@@ -6,8 +6,8 @@ import FluentUI
 
 Rectangle {
     id: consoleRoot
-    width: 500
-    height: 300
+    width: debugConsole.width
+    height: debugConsole.height
     color: "white"
     radius: 8
     border.color: "#a0a0a0"

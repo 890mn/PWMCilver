@@ -43,29 +43,16 @@ ScrollView {
         Rectangle {
             id: controlRect
             width: parent.width - 20
-            height: rightArea.height - 235
+            height: rightArea.height - debugRect.height - 10
             radius: 10
             border.color: "#a0a0a0"
             color: "white"
 
             ControlPanel {
                 id: controlPanel
-                anchors.horizontalCenter: parent.horizontalCenter
-
-                onApplyCommand: (dir, dis) => {
-                    console.log("发送指令：", dir, dis)
-                    // 调用蓝牙发送函数
-                }
-
-                onStopCommand: {
-                    console.log("急停指令已发出")
-                    // 调用 STOP 相关函数
-                }
-
-                // 🚨 实时更新 currentStatus 显示内容
-                Component.onCompleted: {
-                    currentStatus = "Waiting..."
-                }
+                width: parent.width - 4
+                height: parent.height - 4
+                anchors.centerIn: parent
             }
         }
     }

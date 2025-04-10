@@ -5,9 +5,9 @@ import "layout"
 
 FluWindow {
     id: mainWindow
-    width: 1081
+    width: 1150
     height: 627
-    minimumWidth: 900
+    minimumWidth: 920
     minimumHeight: 422
     title: qsTr("PWMCilver")
 

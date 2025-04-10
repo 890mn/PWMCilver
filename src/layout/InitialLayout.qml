@@ -13,7 +13,7 @@ Item {
     property int maxLight: 8
     property int maxSensor: 8
 
-    property bool bthLinked: false
+    property bool bthLinked: true
     property bool bthLoading: false
 
     property bool isConnecting: false
