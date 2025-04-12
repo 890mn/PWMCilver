@@ -13,7 +13,6 @@ Rectangle {
     border.color: "#a0a0a0"
     border.width: 2
 
-    // ✅ 数据共享属性：其他模块可通过 debugConsole.xxx 访问
     property int leftDistance: -1
     property int frontDistance: -1
     property int rightDistance: -1
@@ -118,27 +117,5 @@ Rectangle {
                 flickArea.contentY = flickArea.contentHeight - flickArea.height;
             });
         }
-    }
-
-    function formatMotorData(data) {
-        if (!data || typeof data !== "object") {
-            return "⚠️ 电机数据无效（未定义或格式错误）"
-        }
-
-        let output = "电机状态：\n"
-        let keys = Object.keys(data)
-        keys.sort() // 固定顺序
-
-        for (let i = 0; i < keys.length; ++i) {
-            let id = keys[i]
-            let motor = data[id]
-            if (motor && typeof motor === "object") {
-                output += "  ➤ #" + id + ": PWM=" + motor.pwm + ", TIME=" + motor.time + "\n"
-            } else {
-                output += "  ❌ #" + id + ": 数据格式异常\n"
-            }
-        }
-
-        return output
     }
 }

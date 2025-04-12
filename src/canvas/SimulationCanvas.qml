@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Shapes 1.15
+import "../canvas"
 
 Rectangle {
     id: root
@@ -13,10 +14,11 @@ Rectangle {
     width: parent.width
     height: parent.height
 
-    property int frontDistance: 21
-    property int leftDistance: 91
-    property int rightDistance: 23
-    property int backDistance: 25
+    property int frontDis: 0
+    property int leftDis: 0
+    property int rightDis: 0
+    property int backDis: 0
+
     property int maxDistance: 100
 
     function getColorByDistance(dist) {
@@ -51,24 +53,24 @@ Rectangle {
                 ctx.fill()
             }
 
-            drawSector(root.frontDistance, 270)
-            drawSector(root.backDistance, 90)
-            drawSector(root.leftDistance, 180)
-            drawSector(root.rightDistance, 0)
+            drawSector(root.frontDis, 270)
+            drawSector(root.backDis, 90)
+            drawSector(root.leftDis, 180)
+            drawSector(root.rightDis, 0)
         }
 
         Connections {
             target: root
-            function onFrontDistanceChanged() {
+            function onFrontDisChanged() {
                 sensorCanvas.requestPaint()
             }
-            function onBackDistanceChanged() {
+            function onBackDisChanged() {
                 sensorCanvas.requestPaint()
             }
-            function onLeftDistanceChanged() {
+            function onLeftDisChanged() {
                 sensorCanvas.requestPaint()
             }
-            function onRightDistanceChanged() {
+            function onRightDisChanged() {
                 sensorCanvas.requestPaint()
             }
         }
@@ -119,7 +121,7 @@ Rectangle {
     // ⬇️ 距离标签
     Text {
         id: frontLabel
-        text: "Front: " + root.frontDistance + " cm"
+        text: "Front: " + root.frontDis + " cm"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.topMargin: 10
@@ -128,7 +130,7 @@ Rectangle {
 
     Text {
         id: backLabel
-        text: "Back: " + root.backDistance + " cm"
+        text: "Back: " + root.backDis + " cm"
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 10
@@ -137,7 +139,7 @@ Rectangle {
 
     Text {
         id: leftLabel
-        text: "Left: " + root.leftDistance + " cm"
+        text: "Left: " + root.leftDis + " cm"
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 10
@@ -146,7 +148,7 @@ Rectangle {
 
     Text {
         id: rightLabel
-        text: "Right: " + root.rightDistance + " cm"
+        text: "Right: " + root.rightDis + " cm"
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
         anchors.rightMargin: 10

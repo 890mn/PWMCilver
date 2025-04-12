@@ -16,14 +16,8 @@ Item {
         // 左侧画布区域
         SimulationCanvas {
             id: canvasArea
-
             width: topSection.width * 0.6 - topSection.padding
             height: parent.height
-
-            //frontDistance: logicCore.front
-            //backDistance: logicCore.back
-            //leftDistance: logicCore.left
-            //rightDistance: logicCore.right
         }
 
         // 右侧模块区域

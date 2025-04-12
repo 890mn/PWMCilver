@@ -41,6 +41,11 @@ ScrollView {
                         debugConsole.frontDistance = front
                         debugConsole.rightDistance = right
                         debugConsole.backDistance = back
+
+                        simulationCanvas.leftDis = left
+                        simulationCanvas.frontDis = front
+                        simulationCanvas.rightDis = right
+                        simulationCanvas.backDis = back
                     }
 
                     function onMotorCommandReceived(id, pwm, time) {
