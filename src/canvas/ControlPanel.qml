@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import FluentUI
 import QtQuick.Layouts
+import "../canvas"
 
 Rectangle {
     id: controlRoot
@@ -10,7 +11,7 @@ Rectangle {
     color: "white"
     radius: 8
     border.color: "#a0a0a0"
-    border.width: 2
+    border.width: 2  
 
     // 标题
     FluText {
@@ -35,25 +36,26 @@ Rectangle {
         GridLayout {
             columns: 5
             columnSpacing: 16
-            rowSpacing: 2
+            rowSpacing: 12
             Layout.alignment: Qt.AlignHCenter
+            Layout.fillWidth: true
 
-            FluText { text: "Front:"; font.pixelSize: 18 }
-            FluText { text: "Left:"; font.pixelSize: 18 }
-            FluText { text: "Right:"; font.pixelSize: 18 }
-            FluText { text: "Back:"; font.pixelSize: 18 }
-            FluText { text: "Goal:"; font.pixelSize: 18 }
+            FluText { text: "Left:"; font.pixelSize: 20 }
+            FluText { text: "Front:"; font.pixelSize: 20 }
+            FluText { text: "Right:"; font.pixelSize: 20 }
+            FluText { text: "Back:"; font.pixelSize: 20 }
+            FluText { text: "Goal:"; font.pixelSize: 20 }
 
-            FluText { text: "123 cm"; font.pixelSize: 18 }
-            FluText { text: "124 cm"; font.pixelSize: 18 }
-            FluText { text: "125 cm"; font.pixelSize: 18 }
-            FluText { text: "126 cm"; font.pixelSize: 18 }
-            FluText { text: "200 cm"; font.pixelSize: 18 }
+            FluText { text: debugConsole.leftDistance; font.pixelSize: 20 }
+            FluText { text: debugConsole.frontDistance; font.pixelSize: 20 }
+            FluText { text: debugConsole.rightDistance; font.pixelSize: 20 }
+            FluText { text: debugConsole.backDistance; font.pixelSize: 20 }
+            FluText { text: distanceSelector.currentText; font.pixelSize: 20 }
         }
 
         // 当前状态显示
         FluText {
-            text: "Current:"
+            text: "Current: " + debugConsole.currentMotion
             font.pixelSize: 20
             font.family: smileFont.name
             Layout.alignment: Qt.AlignLeft

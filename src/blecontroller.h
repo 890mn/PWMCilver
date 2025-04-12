@@ -16,6 +16,9 @@ signals:
     void connectedChanged(bool connected);
     void messageReceived(const QString &message);
     void deviceConnected();
+    void ultrasonicDataUpdated(int left, int front, int right, int back);
+    void motorCommandReceived(const QString &id, int pwm, int time);
+
 
 private:
     BLEManager *manager;

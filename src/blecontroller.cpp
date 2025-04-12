@@ -8,6 +8,12 @@ BLEController::BLEController(QObject *parent) : QObject(parent)
     connect(manager, &BLEManager::messageReceived,
             this, &BLEController::messageReceived);
 
+    connect(manager, &BLEManager::ultrasonicDataUpdated,
+            this, &BLEController::ultrasonicDataUpdated);
+
+    connect(manager, &BLEManager::motorCommandReceived,
+            this, &BLEController::motorCommandReceived);
+
     connect(manager, &BLEManager::readyToWrite, this, [=]() {
         m_connected = true;
         emit connectedChanged(m_connected);

@@ -13,6 +13,20 @@ Rectangle {
     border.color: "#a0a0a0"
     border.width: 2
 
+    // ✅ 数据共享属性：其他模块可通过 debugConsole.xxx 访问
+    property int leftDistance: -1
+    property int frontDistance: -1
+    property int rightDistance: -1
+    property int backDistance: -1
+
+    property var motorData: ({
+        "006": { pwm: 1500, time: 0 },
+        "007": { pwm: 1500, time: 0 },
+        "008": { pwm: 1500, time: 0 },
+        "009": { pwm: 1500, time: 0 }
+    })
+    property string currentMotion: "Unknown"
+
     property alias text: debugText.text
     property alias font: debugText.font
     property bool autoScroll: true
@@ -23,9 +37,7 @@ Rectangle {
         anchors.fill: parent
         spacing: 6
 
-        Item {
-            Layout.preferredHeight: 4  // ✅ 下沉高度
-        }
+        Item { Layout.preferredHeight: 4 }
 
         RowLayout {
             Layout.fillWidth: true
@@ -42,7 +54,6 @@ Rectangle {
                 Layout.alignment: Qt.AlignVCenter
             }
 
-            // 右侧按钮区
             RowLayout {
                 spacing: 12
                 Layout.alignment: Qt.AlignVCenter
@@ -57,11 +68,9 @@ Rectangle {
                 FluButton {
                     text: "Clear"
                     font.pixelSize: 16
-
                     normalColor: colorWhite
                     hoverColor: colorWhiteHover
                     textColor: colorPink
-
                     implicitWidth: font.pixelSize * text.length * 0.65
                     implicitHeight: font.pixelSize * 1.3
 
@@ -71,9 +80,7 @@ Rectangle {
                     }
                 }
 
-                Item {
-                    Layout.preferredWidth: 4
-                }
+                Item { Layout.preferredWidth: 4 }
             }
         }
 
@@ -98,9 +105,7 @@ Rectangle {
             }
         }
 
-        Item {
-            Layout.preferredHeight: 2  // ✅ 下沉高度
-        }
+        Item { Layout.preferredHeight: 2 }
     }
 
     function appendMessage(msg) {
@@ -113,5 +118,27 @@ Rectangle {
                 flickArea.contentY = flickArea.contentHeight - flickArea.height;
             });
         }
+    }
+
+    function formatMotorData(data) {
+        if (!data || typeof data !== "object") {
+            return "⚠️ 电机数据无效（未定义或格式错误）"
+        }
+
+        let output = "电机状态：\n"
+        let keys = Object.keys(data)
+        keys.sort() // 固定顺序
+
+        for (let i = 0; i < keys.length; ++i) {
+            let id = keys[i]
+            let motor = data[id]
+            if (motor && typeof motor === "object") {
+                output += "  ➤ #" + id + ": PWM=" + motor.pwm + ", TIME=" + motor.time + "\n"
+            } else {
+                output += "  ❌ #" + id + ": 数据格式异常\n"
+            }
+        }
+
+        return output
     }
 }
