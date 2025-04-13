@@ -36,16 +36,25 @@ ScrollView {
                         debugConsole.appendMessage(message)
                     }
 
-                    function onUltrasonicDataUpdated(left, front, right, back) {
-                        debugConsole.leftDistance = left
-                        debugConsole.frontDistance = front
-                        debugConsole.rightDistance = right
-                        debugConsole.backDistance = back
-
-                        simulationCanvas.leftDis = left
-                        simulationCanvas.frontDis = front
-                        simulationCanvas.rightDis = right
-                        simulationCanvas.backDis = back
+                    function onUltrasonicSingleUpdated(dir, value) {
+                        switch (dir) {
+                        case 1:
+                            debugConsole.leftDistance = value;
+                            simulationCanvas.leftDis = value;
+                            break;
+                        case 2:
+                            debugConsole.frontDistance = value;
+                            simulationCanvas.frontDis = value;
+                            break;
+                        case 3:
+                            debugConsole.rightDistance = value;
+                            simulationCanvas.rightDis = value;
+                            break;
+                        case 4:
+                            debugConsole.backDistance = value;
+                            simulationCanvas.backDis = value;
+                            break;
+                        }
                     }
 
                     function onMotorCommandReceived(id, pwm, time) {

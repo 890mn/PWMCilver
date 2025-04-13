@@ -58,6 +58,7 @@ void BLEManager::connectToDevice(const QBluetoothDeviceInfo &info)
 
                 for (const QLowEnergyCharacteristic &ch : service->characteristics()) {
                     if (ch.uuid().toString().contains("ffe1", Qt::CaseInsensitive)) {
+                        writeCharacteristic = ch;
                         qDebug() << "找到 FFE1 特征，设置通知监听";
                         QBluetoothUuid notifyUuid(QStringLiteral("00002902-0000-1000-8000-00805f9b34fb")); // CCCD UUID
                         QLowEnergyDescriptor notifyDesc = ch.descriptor(notifyUuid);
@@ -66,31 +67,24 @@ void BLEManager::connectToDevice(const QBluetoothDeviceInfo &info)
                         }
 
                         connect(service, &QLowEnergyService::characteristicChanged, this,
-                            [=](const QLowEnergyCharacteristic &c, const QByteArray &value) {
+                            [=](const QLowEnergyCharacteristic &c, const QByteArray &value) {                        
                             if (c.uuid() == ch.uuid()) {
                                 QString rawData = QString::fromUtf8(value);
                                 qDebug() << "收到数据:" << rawData;
                                 emit messageReceived(rawData); // 原始数据依然传出去
 
+                                static QRegularExpressionMatchIterator it;
                                 if (rawData.contains("UTime")) {
-                                    // 解析超声波数据
-                                    QMap<int, int> parsed;
                                     QRegularExpression regex(R"(\[(\d+)\]UTime=(\d+))");
-                                    QRegularExpressionMatchIterator it = regex.globalMatch(rawData);
+                                    it = regex.globalMatch(rawData);
+
                                     while (it.hasNext()) {
                                         QRegularExpressionMatch match = it.next();
                                         int index = match.captured(1).toInt(); // 1~4
                                         int value = match.captured(2).toInt();
-                                        parsed[index] = value;
+                                        ultrasonicCache[index] = value;
+                                        emit ultrasonicSingleUpdated(index, ultrasonicCache.value(index, 5));
                                     }
-
-                                    // 顺序：1=左，2=前，3=右，4=后
-                                    emit ultrasonicDataUpdated(
-                                        parsed.value(1, -1), // Left
-                                        parsed.value(2, -1), // Front
-                                        parsed.value(3, -1), // Right
-                                        parsed.value(4, -1)  // Back
-                                    );
                                 } else {
                                     QString trimmed = rawData.trimmed();
                                     if (trimmed.startsWith('{') && trimmed.endsWith('}')) {
@@ -124,3 +118,12 @@ void BLEManager::connectToDevice(const QBluetoothDeviceInfo &info)
     controller->connectToDevice();
 }
 
+void BLEManager::sendMessage(const QString &message)
+{
+    if (service && writeCharacteristic.isValid()) {
+        QByteArray data = message.toUtf8();
+        service->writeCharacteristic(writeCharacteristic, data, QLowEnergyService::WriteWithResponse);
+    } else {
+        qWarning() << "⚠️ 无法发送，特征值无效或服务未准备好";
+    }
+}

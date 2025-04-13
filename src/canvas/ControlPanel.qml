@@ -54,12 +54,20 @@ Rectangle {
         }
 
         // 当前状态显示
-        FluText {
-            text: "Current: " + debugConsole.currentMotion
-            font.pixelSize: 20
-            font.family: smileFont.name
+        RowLayout {
             Layout.alignment: Qt.AlignLeft
             Layout.leftMargin: 10
+            spacing: 20
+            width: parent.width - 20
+            Layout.fillWidth: true
+
+            FluText {
+                text: "Current: " + debugConsole.currentMotion
+                font.pixelSize: 20
+                font.family: smileFont.name
+                Layout.alignment: Qt.AlignLeft
+                Layout.fillWidth: true
+            }
         }
 
         // 控制命令区（Direction + Distance）
@@ -107,7 +115,8 @@ Rectangle {
                 implicitHeight: font.pixelSize * 1.7
 
                 onClicked: {
-                    // 停止命令
+                    BLE.sendMessage("$STOP!")
+                    console.log("急停！")
                 }
             }
 

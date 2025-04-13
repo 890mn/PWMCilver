@@ -13,10 +13,10 @@ Rectangle {
     border.color: "#a0a0a0"
     border.width: 2
 
-    property int leftDistance: -1
-    property int frontDistance: -1
-    property int rightDistance: -1
-    property int backDistance: -1
+    property int leftDistance: 0
+    property int frontDistance: 0
+    property int rightDistance: 0
+    property int backDistance: 0
 
     property var motorData: ({
         "006": { pwm: 1500, time: 0 },
@@ -104,6 +104,29 @@ Rectangle {
             }
         }
 
+        RowLayout {
+            Layout.fillWidth: true
+            height: 60
+            spacing: 16
+            Layout.alignment: Qt.AlignRight
+            Layout.rightMargin: 11
+
+            FluTextBox {
+                id: sendInput
+                placeholderText: "调试指令由此输入:"
+                width: parent.width / 3
+            }
+
+            FluButton {
+                text: "发送"
+                onClicked: {
+                    if (sendInput.text.length > 0) {
+                        BLE.sendMessage(sendInput.text)
+                        sendInput.clear()
+                    }
+                }
+            }
+        }
         Item { Layout.preferredHeight: 2 }
     }
 

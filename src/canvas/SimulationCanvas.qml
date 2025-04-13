@@ -32,6 +32,8 @@ Rectangle {
     Canvas {
         id: sensorCanvas
         anchors.fill: parent
+        width: parent.width
+        height: parent.height
         z: 1
 
         onPaint: {
@@ -44,7 +46,7 @@ Rectangle {
             function drawSector(distance, angleDeg) {
                 const angleRad = angleDeg * Math.PI / 180
                 const spread = 30 * Math.PI / 180
-                const radius = Math.min(distance * 2, width / 2.5)
+                const radius = distance === -1 ? width / 2.5 : Math.min(distance * 2, width / 2.5)
                 ctx.beginPath()
                 ctx.moveTo(centerX, centerY)
                 ctx.arc(centerX, centerY, radius, angleRad - spread / 2, angleRad + spread / 2)
