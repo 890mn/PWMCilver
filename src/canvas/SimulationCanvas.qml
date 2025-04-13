@@ -67,48 +67,52 @@ Rectangle {
             centerY: carBody.y + carBody.height / 2
         }
     }
-/*
+
     // 🧭 四方向距离文本（绑定 DebugConsole 中的属性）
     Text {
         text: simulationCanvas.frontDis + " cm"
+        font.family: smileFont.name
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.horizontalCenterOffset: -20
         anchors.top: parent.top
-        anchors.topMargin: 135
-        font.pixelSize: 16
+        anchors.topMargin: 30
+        anchors.leftMargin: 10
+        font.pixelSize: 18
         color: "#3a3a3a"
     }
 
     Text {
         text: simulationCanvas.backDis + " cm"
+        font.family: smileFont.name
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.horizontalCenterOffset: 20
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 135
-        font.pixelSize: 16
+        anchors.bottomMargin: 30
+        anchors.rightMargin: 10
+        font.pixelSize: 18
         color: "#3a3a3a"
     }
 
     Text {
         text: simulationCanvas.leftDis + " cm"
+        font.family: smileFont.name
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: 20
+        anchors.verticalCenterOffset: 18
         anchors.left: parent.left
-        anchors.leftMargin: 180
-        font.pixelSize: 16
+        anchors.leftMargin: 93
+        font.pixelSize: 18
         color: "#3a3a3a"
     }
 
     Text {
         text: simulationCanvas.rightDis + " cm"
+        font.family: smileFont.name
         anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: -20
+        anchors.verticalCenterOffset: -18
         anchors.right: parent.right
-        anchors.rightMargin: 180
-        font.pixelSize: 16
+        anchors.rightMargin: 93
+        font.pixelSize: 18
         color: "#3a3a3a"
     }
-*/
+
     Canvas {
         id: sensorCanvas
         anchors.fill: parent
@@ -141,7 +145,7 @@ Rectangle {
                 const endX = startX + dx * length
                 const endY = startY + dy * length
 
-                const capLength = Math.abs(startX - endX) * 0.3 + Math.abs(startY - endY) * 0.3 // 横杠长度
+                const capLength = Math.abs(startX - endX) * 0.2 + Math.abs(startY - endY) * 0.2 // 横杠长度
 
                 ctx.strokeStyle = getColor(distance)
                 ctx.lineWidth = 6
