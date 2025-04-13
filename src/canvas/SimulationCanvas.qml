@@ -15,6 +15,18 @@ Rectangle {
     border.color: "#a0a0a0"
     border.width: 2
 
+    property bool canUpdate: true
+
+    function throttledPaint() {
+        if (canUpdate) {
+            sensorCanvas.requestPaint()
+            canUpdate = false
+            Qt.callLater(function() {
+                canUpdate = true
+            })
+        }
+    }
+
     // 标题
     FluText {
         x: 7
@@ -174,16 +186,16 @@ Rectangle {
         Connections {
             target: simulationCanvas
             function onFrontDisChanged() {
-                sensorCanvas.requestPaint()
+                throttledPaint()
             }
             function onBackDisChanged() {
-                sensorCanvas.requestPaint()
+                throttledPaint()
             }
             function onLeftDisChanged() {
-                sensorCanvas.requestPaint()
+                throttledPaint()
             }
             function onRightDisChanged() {
-                sensorCanvas.requestPaint()
+                throttledPaint()
             }
         }
     }
