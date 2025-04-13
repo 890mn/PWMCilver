@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QObject>
+#include <QQueue>
 #include <QLowEnergyController>
 #include <QLowEnergyService>
 #include <QBluetoothDeviceDiscoveryAgent>
@@ -16,6 +17,7 @@ public:
     void stopScan();
     void connectToDevice(const QBluetoothDeviceInfo &info);
     Q_INVOKABLE void sendMessage(const QString &message);
+    void trySendNext(void);
 
 signals:
     void deviceDiscovered(const QString &name, const QBluetoothDeviceInfo &info);
@@ -30,7 +32,7 @@ private:
     QBluetoothDeviceDiscoveryAgent *discoveryAgent = nullptr;
     QLowEnergyController *controller = nullptr;
     QLowEnergyService *service = nullptr;
-    QLowEnergyCharacteristic writeCharacteristic;
+    QLowEnergyCharacteristic writeCharacteristic;    
 
     QBluetoothUuid serviceUuid = QBluetoothUuid(QStringLiteral("0000FFE0-0000-1000-8000-00805F9B34FB"));
     QBluetoothUuid charUuid = QBluetoothUuid(QStringLiteral("0000FFE1-0000-1000-8000-00805F9B34FB"));
@@ -39,4 +41,7 @@ private:
 
     void parseUltrasonicData(const QString &data);
     void parseMotorCommand(const QString &data);
+
+    QQueue<QString> messageQueue;
+    bool sending = false;
 };

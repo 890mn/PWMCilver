@@ -117,13 +117,20 @@ Rectangle {
                 width: parent.width / 3
             }
 
-            FluButton {
+            Timer {
+                id: sendThrottle
+                interval: 100
+                repeat: false
+                onTriggered: {
+                    BLE.sendMessage(sendInput.text)
+                }
+            }
+
+            FluFilledButton {
                 text: "发送"
                 onClicked: {
-                    if (sendInput.text.length > 0) {
-                        BLE.sendMessage(sendInput.text)
-                        sendInput.clear()
-                    }
+                    if (!sendThrottle.running)
+                        sendThrottle.start()
                 }
             }
         }

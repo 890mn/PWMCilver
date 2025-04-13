@@ -34,7 +34,7 @@ Rectangle {
         anchors.fill: parent
         width: parent.width
         height: parent.height
-        z: 1
+        //z: 1
 
         onPaint: {
             const ctx = getContext("2d")

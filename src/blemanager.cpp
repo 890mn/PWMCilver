@@ -4,6 +4,7 @@
 #include <QRegularExpressionMatch>
 #include <QRegularExpressionMatchIterator>
 #include <QMap>
+#include <QTimer>
 
 BLEManager::BLEManager(QObject *parent) : QObject(parent)
 {
@@ -72,11 +73,9 @@ void BLEManager::connectToDevice(const QBluetoothDeviceInfo &info)
                                 QString rawData = QString::fromUtf8(value);
                                 qDebug() << "收到数据:" << rawData;
                                 emit messageReceived(rawData); // 原始数据依然传出去
-
-                                static QRegularExpressionMatchIterator it;
                                 if (rawData.contains("UTime")) {
                                     QRegularExpression regex(R"(\[(\d+)\]UTime=(\d+))");
-                                    it = regex.globalMatch(rawData);
+                                    QRegularExpressionMatchIterator it = regex.globalMatch(rawData);                                    ;
 
                                     while (it.hasNext()) {
                                         QRegularExpressionMatch match = it.next();
@@ -118,12 +117,23 @@ void BLEManager::connectToDevice(const QBluetoothDeviceInfo &info)
     controller->connectToDevice();
 }
 
-void BLEManager::sendMessage(const QString &message)
-{
-    if (service && writeCharacteristic.isValid()) {
-        QByteArray data = message.toUtf8();
-        service->writeCharacteristic(writeCharacteristic, data, QLowEnergyService::WriteWithResponse);
-    } else {
-        qWarning() << "⚠️ 无法发送，特征值无效或服务未准备好";
-    }
+void BLEManager::sendMessage(const QString &message) {
+    messageQueue.enqueue(message);
+    trySendNext(); // 只触发一次
+}
+
+void BLEManager::trySendNext() {
+    if (sending || messageQueue.isEmpty() || !writeCharacteristic.isValid())
+        return;
+
+    sending = true;
+    QString next = messageQueue.dequeue();
+    QByteArray data = next.toUtf8();
+
+    service->writeCharacteristic(writeCharacteristic, data, QLowEnergyService::WriteWithoutResponse);
+
+    QTimer::singleShot(50, this, [this]() {
+        sending = false;
+        trySendNext(); // 发下一条
+    });
 }
