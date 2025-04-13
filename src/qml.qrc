@@ -14,5 +14,11 @@
         <file>asset/logo.ico</file>
         <file>canvas/DebugConsole.qml</file>
         <file>canvas/ControlPanel.qml</file>
+        <file>asset/arrow_pngtree.png</file>
+        <file>asset/finish_pngtree.png</file>
+        <file>asset/loading_pngtree.png</file>
+        <file>simulation/CarBody.qml</file>
+        <file>simulation/SensorRect.qml</file>
+        <file>simulation/Wheel.qml</file>
     </qresource>
 </RCC>

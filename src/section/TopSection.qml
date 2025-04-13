@@ -18,6 +18,12 @@ Item {
             id: canvasArea
             width: topSection.width * 0.6 - topSection.padding
             height: parent.height
+
+            property int frontDis: 0
+            property int leftDis: 0
+            property int rightDis: 0
+            property int backDis: 0
+            property int maxDistance: 130
         }
 
         // 右侧模块区域
