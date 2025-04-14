@@ -36,6 +36,10 @@ ScrollView {
                         debugConsole.appendMessage(message)
                     }
 
+                    function onCurrentMotionChanged() {
+                        debugConsole.currentMotion = BLE.currentMotion
+                    }
+
                     function onUltrasonicSingleUpdated(dir, value) {
                         switch (dir) {
                         case 1:
@@ -55,41 +59,6 @@ ScrollView {
                             simulationCanvas.backDis = value;
                             break;
                         }
-                    }
-
-                    function onMotorCommandReceived(id, pwm, time) {
-                        console.log("电机指令 => ID:", id, "PWM:", pwm, "Time:", time)
-
-                        debugConsole.appendMessage(`电机 #${id} => PWM: ${pwm}, Time: ${time}`)
-                        debugConsole.motorData[id]["pwm"] = pwm
-                        debugConsole.motorData[id]["time"] = time
-
-                        function pwmToDir(pwm) {
-                            if (pwm > 1500) return "正";
-                            if (pwm < 1500) return "反";
-                            return "停";
-                        }
-
-                        let fl = pwmToDir(debugConsole.motorData["006"].pwm)
-                        let fr = pwmToDir(debugConsole.motorData["007"].pwm)
-                        let bl = pwmToDir(debugConsole.motorData["008"].pwm)
-                        let br = pwmToDir(debugConsole.motorData["009"].pwm)
-
-                        let motion = "未知"
-
-                        if (fl === "正" && fr === "反" && bl === "正" && br === "反") {
-                            motion = "前进"
-                        } else if (fl === "反" && fr === "正" && bl === "反" && br === "正") {
-                            motion = "后退"
-                        } else if (fl === "反" && fr === "反" && bl === "正" && br === "正") {
-                            motion = "左转"
-                        } else if (fl === "正" && fr === "正" && bl === "反" && br === "反") {
-                            motion = "右转"
-                        } else if (fl === "停" && fr === "停" && bl === "停" && br === "停") {
-                            motion = "停止"
-                        }
-
-                        debugConsole.currentMotion = motion
                     }
                 }
             }

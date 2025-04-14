@@ -18,13 +18,7 @@ Rectangle {
     property int rightDistance: 0
     property int backDistance: 0
 
-    property var motorData: ({
-        "006": { pwm: 1500, time: 0 },
-        "007": { pwm: 1500, time: 0 },
-        "008": { pwm: 1500, time: 0 },
-        "009": { pwm: 1500, time: 0 }
-    })
-    property string currentMotion: "Unknown"
+    property string currentMotion: "IDLE"
 
     property alias text: debugText.text
     property alias font: debugText.font
