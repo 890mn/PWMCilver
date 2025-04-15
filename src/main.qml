@@ -63,7 +63,7 @@ FluWindow {
             visible: false
             onReturnToHome: {
                 returnAnimation.start()
-        }
+            }
         }
 
         SequentialAnimation {

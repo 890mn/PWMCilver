@@ -60,33 +60,33 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="183"/>
+        <location filename="layout/InitialLayout.qml" line="202"/>
         <source>❯ Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="219"/>
+        <location filename="layout/InitialLayout.qml" line="238"/>
         <source>愿你在上位机的世界沐浴五束阳光 |</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="252"/>
+        <location filename="layout/InitialLayout.qml" line="271"/>
         <source>软件环境设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="265"/>
+        <location filename="layout/InitialLayout.qml" line="284"/>
         <source>- PWMCilver 软件最小宽度 / 长度 [不建议小于默认数值]</source>
         <oldsource>- CSilver 软件最小宽度 / 长度 [不建议小于默认数值]</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="299"/>
+        <location filename="layout/InitialLayout.qml" line="318"/>
         <source>X</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="layout/InitialLayout.qml" line="340"/>
+        <location filename="layout/InitialLayout.qml" line="359"/>
         <source>- 是否开启调试模式？[开启后虚拟串口将会替代蓝牙连接] | COM65[External] &amp; COM66[Qt]</source>
         <oldsource>- 是否开启调试模式？[开启后虚拟串口将会替代蓝牙连接][默认配对端口为COM65[External] &amp; COM66[Qt]]</oldsource>
         <translation type="unfinished"></translation>
