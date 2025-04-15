@@ -8,19 +8,17 @@ Item {
         id: bottomRow
         width: bottomSection.width
         height: bottomSection.height
-        spacing: 10
 
         // 蓝牙连接状态
         Rectangle {
-            Layout.preferredWidth: 1
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-            height: 30
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignLeft
+            height: 40
             color: "transparent"
             border.color: "transparent"
 
             Text {
-                text: qsTr("BT: Connected / Good")
+                text: qsTr("BT: Connected / DX-BT24")
                 anchors.centerIn: parent
                 font.pixelSize: 20
                 font.family: smileFont.name
@@ -30,15 +28,14 @@ Item {
 
         // 小车电量状态
         Rectangle {
-            Layout.preferredWidth: 1
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-            height: 30
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignLeft
+            height: 40
             color: "transparent"
             border.color: "transparent"
 
             Text {
-                text: qsTr("Power: 80% / 3.7V")
+                text: qsTr("Power: 80% / 3.7V 1000mAh")
                 anchors.centerIn: parent
                 font.pixelSize: 20
                 font.family: smileFont.name
@@ -48,15 +45,14 @@ Item {
 
         // 小车主控状态
         Rectangle {
-            Layout.preferredWidth: 1
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-            height: 30
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignLeft
+            height: 40
             color: "transparent"
             border.color: "transparent"
 
             Text {
-                text: qsTr("MCU: Ready / v0.1.0")
+                text: qsTr("MCU: STM32 / PWMC Ver.0.1.0")
                 anchors.centerIn: parent
                 font.pixelSize: 20
                 font.family: smileFont.name
@@ -67,7 +63,7 @@ Item {
         // 返回主页按钮
         FluFilledButton {
             text: qsTr("返回主页 / Back")
-            font.pixelSize: 20
+            font.pixelSize: 22
             font.family: smileFont.name
             height: bottomRow.width * 0.1
             width: bottomRow.width * 0.13

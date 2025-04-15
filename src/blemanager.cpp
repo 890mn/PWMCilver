@@ -193,12 +193,12 @@ QString BLEManager::computeMotionState()
     QString bl = pwmToDir(m_motorMap["008"]->pwm());
     QString br = pwmToDir(m_motorMap["009"]->pwm());
 
-    if (fl == "正" && fr == "反" && bl == "正" && br == "反") return "前进";
-    if (fl == "反" && fr == "正" && bl == "反" && br == "正") return "后退";
-    if (fl == "反" && fr == "反" && bl == "正" && br == "正") return "左转";
-    if (fl == "正" && fr == "正" && bl == "反" && br == "反") return "右转";
-    if (fl == "停" && fr == "停" && bl == "停" && br == "停") return "停止";
-    return "未知";
+    if (fl == "正" && fr == "反" && bl == "正" && br == "反") return "前进 MOVE_FORWARD";
+    if (fl == "反" && fr == "正" && bl == "反" && br == "正") return "后退 MOVE_BACKWARD";
+    if (fl == "反" && fr == "反" && bl == "正" && br == "正") return "左转 MOVE_LEFT";
+    if (fl == "正" && fr == "正" && bl == "反" && br == "反") return "右转 MOVE_RIGHT";
+    if (fl == "停" && fr == "停" && bl == "停" && br == "停") return "停止 STOP";
+    return "IDLE";
 }
 
 QString BLEManager::currentMotion() const

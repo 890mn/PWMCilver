@@ -4,25 +4,25 @@
 <context>
     <name>BottomSection</name>
     <message>
-        <location filename="section/BottomSection.qml" line="23"/>
-        <source>BT: Connected / Good</source>
-        <oldsource>BT: Connected</oldsource>
+        <location filename="section/BottomSection.qml" line="21"/>
+        <source>BT: Connected / DX-BT24</source>
+        <oldsource>BT: Connected / Good</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="section/BottomSection.qml" line="41"/>
-        <source>Power: 80% / 3.7V</source>
-        <oldsource>Power: 80%</oldsource>
+        <location filename="section/BottomSection.qml" line="38"/>
+        <source>Power: 80% / 3.7V 1000mAh</source>
+        <oldsource>Power: 80% / 3.7V</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="section/BottomSection.qml" line="59"/>
-        <source>MCU: Ready / v0.1.0</source>
-        <oldsource>MCU: Ready</oldsource>
+        <location filename="section/BottomSection.qml" line="55"/>
+        <source>MCU: STM32 / PWMC Ver.0.1.0</source>
+        <oldsource>MCU: STM32F103C8T6 / PWMC Ver.0.1.0</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="section/BottomSection.qml" line="69"/>
+        <location filename="section/BottomSection.qml" line="65"/>
         <source>返回主页 / Back</source>
         <translation type="unfinished"></translation>
     </message>
