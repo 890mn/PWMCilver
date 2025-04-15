@@ -163,7 +163,6 @@ Item {
                     }
 
                     function onDebugModeChanged(enabled) {
-
                         if (bthLinked) {
                             // 切回蓝牙模式后刷新显示
                             if (!BLE.connected) {

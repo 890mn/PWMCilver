@@ -199,4 +199,63 @@ Rectangle {
             }
         }
     }
+
+    // 右下角图例 Legend
+    Rectangle {
+        id: legendBox
+        width: 200
+        height: 50
+        radius: 8
+        color: "transparent"
+        border.color: "#b0b0b0"
+        border.width: 1
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.rightMargin: 10
+        anchors.bottomMargin: 10
+
+        Column {
+            anchors.fill: parent
+            anchors.margins: 8
+            anchors.topMargin: 12
+            spacing: 4
+
+            Rectangle {
+                id: gradientBar
+                width: parent.width - 16
+                height: 12
+                radius: 6
+                anchors.horizontalCenter: parent.horizontalCenter
+                layer.enabled: true
+                layer.smooth: true
+
+                gradient: Gradient {
+                    orientation: Gradient.Horizontal
+                    GradientStop { position: 0.0; color: "#EA1F1F" }   // 红
+                    GradientStop { position: 0.5; color: "#EABE1F" }   // 橙
+                    GradientStop { position: 1.0; color: "#5CEA1F" }   // 绿
+                }
+            }
+
+            Row {
+                id: scaleLabels
+                spacing: (gradientBar.width - 3 * 20) / 2  // 自动分配空间
+                anchors.horizontalCenter: parent.horizontalCenter
+                width: gradientBar.width
+                height: 20
+
+                Repeater {
+                    model: ["0cm", "50cm", "100cm"]
+                    Text {
+                        text: modelData
+                        font.pixelSize: 11
+                        color: "#505050"
+                        font.family: smileFont.name
+                        horizontalAlignment: Text.AlignHCenter
+                        width: 20
+                    }
+                }
+            }
+        }
+    }
 }
