@@ -137,8 +137,8 @@ Rectangle {
                     // 发送控制命令
                     let dir = directionSelector.currentText
                     let dis = distanceSelector.currentText
-                    BLE.sendMessage("@" + dir + " " + dis)
-                    console.log("指令已发送:", "@" + dir + " " + dis)
+                    BLE.sendMessage("@" + dir + dis)
+                    console.log("指令已发送:", "@" + dir + dis)
                 }
             }
         }

@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
         }
     }
     QQmlApplicationEngine engine;
-    BLEManager manager;
-    engine.rootContext()->setContextProperty("BLE", &manager);
+
+    engine.rootContext()->setContextProperty("BLE", BLEManager::instance());
     qmlRegisterType<MotorInfo>("CustomTypes", 1, 0, "MotorInfo");
 
     const QUrl url(QStringLiteral("qrc:/App.qml"));

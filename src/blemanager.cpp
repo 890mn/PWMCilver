@@ -22,6 +22,12 @@ BLEManager::BLEManager(QObject *parent) : QObject(parent)
     });
 }
 
+BLEManager* BLEManager::instance()
+{
+    static BLEManager* m_instance = new BLEManager(); // 静态唯一实例
+    return m_instance;
+}
+
 void BLEManager::startScan()
 {
     discoveryAgent->start();
@@ -32,8 +38,53 @@ void BLEManager::stopScan()
     discoveryAgent->stop();
 }
 
+void BLEManager::setDebugMode(bool enabled)
+{
+    if (m_debugMode == enabled)
+        return;
+
+    m_debugMode = enabled;
+
+    if (enabled) {
+        if (!debugBackend) {
+            debugBackend = new SerialDebugBackend(this);
+            connect(debugBackend, &SerialDebugBackend::messageReceived,
+                    this, &BLEManager::messageReceived);
+        }
+        debugBackend->start("COM66");
+        emit connectedChanged(true);
+        emit deviceConnected();
+        emit readyToWrite();
+    } else {
+        if (debugBackend)
+            debugBackend->stop();
+    }
+
+    emit debugModeChanged();
+}
+
+bool BLEManager::debugMode() const
+{
+    return m_debugMode;
+}
+
+void BLEManager::sendMessage(const QString &message)
+{
+    if (m_debugMode && debugBackend) {
+        debugBackend->sendMessage(message);
+        return;
+    }
+    // 否则还是 BLE 模式
+    messageQueue.enqueue(message);
+    trySendNext();
+}
+
 void BLEManager::connectToTargetDevice()
 {
+    if (m_debugMode) {
+        qDebug() << "调试模式开启，跳过蓝牙连接";
+        return;
+    }
     startScan();
     connect(this, &BLEManager::deviceDiscovered, this, [=](const QString &name, const QBluetoothDeviceInfo &info) {
         if (name.contains("PWMC-BT24", Qt::CaseInsensitive)) {
@@ -87,13 +138,9 @@ void BLEManager::connectToDevice(const QBluetoothDeviceInfo &info)
                                 [=](const QLowEnergyCharacteristic &c, const QByteArray &value) {
                                     if (c.uuid() == ch.uuid()) {
                                         QString rawData = QString::fromUtf8(value);
-                                        qDebug() << "收到数据:" << rawData;
+                                        qDebug() << "[蓝牙] 收到数据:" << rawData;
                                         emit messageReceived(rawData);
-                                        if (rawData.contains("UTime")) {
-                                            parseUltrasonicData(rawData);
-                                        } else {
-                                            parseMotorCommand(rawData);
-                                        }
+                                        handleRawData(rawData);
                                     }
                                 });
                         break;
@@ -106,12 +153,6 @@ void BLEManager::connectToDevice(const QBluetoothDeviceInfo &info)
     });
 
     controller->connectToDevice();
-}
-
-void BLEManager::sendMessage(const QString &message)
-{
-    messageQueue.enqueue(message);
-    trySendNext();
 }
 
 void BLEManager::trySendNext()
@@ -177,6 +218,14 @@ void BLEManager::handleMotorCommand(const QString &id, int pwm, int time)
     if (motion != m_currentMotion) {
         m_currentMotion = motion;
         emit currentMotionChanged();
+    }
+}
+
+void BLEManager::handleRawData(const QString &rawData) {
+    if (rawData.contains("UTime")) {
+        parseUltrasonicData(rawData);
+    } else {
+        parseMotorCommand(rawData);
     }
 }
 

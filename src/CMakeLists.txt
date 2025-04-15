@@ -16,8 +16,8 @@ else()
     set(APPLICATION_DIR_PATH ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 endif()
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick Bluetooth)
-find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Bluetooth)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Core Quick Bluetooth SerialPort)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Core Quick Bluetooth SerialPort)
 
 find_program(QT_LUPDATE NAMES lupdate)
 find_program(QT_LRELEASE NAMES lrelease)
@@ -46,6 +46,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         blemanager.h
         blemanager.cpp
         MotorInfo.h
+        serialdebugbackend.h
+        serialdebugbackend.cpp
 
 
     )
@@ -61,6 +63,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     Qt${QT_VERSION_MAJOR}::Core
     Qt${QT_VERSION_MAJOR}::Quick
     Qt${QT_VERSION_MAJOR}::Bluetooth
+    Qt${QT_VERSION_MAJOR}::SerialPort
     fluentuiplugin
 
 )

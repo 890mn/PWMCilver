@@ -184,15 +184,21 @@ Item {
                 normalColor: colorWhite
                 hoverColor: colorWhiteHover
                 disableColor: Qt.rgba(85/255,120/255,155/255,0/255)
-                textColor: bthLinked ? colorPink : colorWhite
 
                 font.pixelSize: mainWindow.height / 22
                 font.family: smileFont.name
                 implicitWidth: font.pixelSize * text.length * 0.47
                 implicitHeight: font.pixelSize * 1.67
 
-                enabled: bthLinked
+                textColor: (bthLinked || BLE.debugMode) ? colorPink : colorWhite
+                enabled: bthLinked || BLE.debugMode
+
                 onClicked: {
+                    if (BLE.debugMode) {
+                        console.log("启动模拟 - 使用调试模式（虚拟串口）")
+                    } else {
+                        console.log("启动模拟 - 蓝牙已连接")
+                    }
                     startSimulation()
                 }
             }
@@ -231,7 +237,7 @@ Item {
 
     FluSheet {
         id:sheet
-        size: 450 // Height
+        size: 250 // Height
 
         Column {
             width: parent.width
@@ -320,6 +326,26 @@ Item {
                         } else {
                             text = mainWindow.minimumHeight;
                         }
+                    }
+                }
+            }
+
+            Row {
+                width: parent.width
+                spacing: 20
+                padding: 5
+                x: 15
+
+                FluText {
+                    text: qsTr("- 是否开启调试模式？[开启后虚拟串口将会替代蓝牙连接] | COM65[External] & COM66[Qt]")
+                    font.family: smileFont.name
+                    font.pixelSize: 21
+                }
+
+                FluToggleSwitch {
+                    y: 4
+                    onClicked: {
+                        BLE.debugMode = !BLE.debugMode
                     }
                 }
             }

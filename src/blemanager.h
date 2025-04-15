@@ -9,22 +9,29 @@
 #include <QBluetoothDeviceInfo>
 #include <QBluetoothUuid>
 #include "MotorInfo.h"
+#include "serialdebugbackend.h"
 
 class BLEManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool connected READ isConnected NOTIFY connectedChanged)
     Q_PROPERTY(QString currentMotion READ currentMotion NOTIFY currentMotionChanged)
+    Q_PROPERTY(bool debugMode READ debugMode WRITE setDebugMode NOTIFY debugModeChanged)
 
 public:
     explicit BLEManager(QObject *parent = nullptr);
+    static BLEManager* instance(); // 单例入口
 
     Q_INVOKABLE void connectToTargetDevice();
     Q_INVOKABLE void sendMessage(const QString &message);
     Q_INVOKABLE void handleMotorCommand(const QString &id, int pwm, int time);
+    void handleRawData(const QString &rawData);
 
     bool isConnected() const { return m_connected; }
     QString currentMotion() const;
+
+    Q_INVOKABLE void setDebugMode(bool enabled);
+    bool debugMode() const;
 
 signals:
     void deviceDiscovered(const QString &name, const QBluetoothDeviceInfo &info);
@@ -35,6 +42,7 @@ signals:
     void ultrasonicSingleUpdated(int direction, int value);
     void motorCommandReceived(const QString &id, int pwm, int time);
     void currentMotionChanged();
+    void debugModeChanged();
 
 private:
     void startScan();
@@ -61,4 +69,7 @@ private:
     QString m_currentMotion;
     bool sending = false;
     bool m_connected = false;
+
+    bool m_debugMode = false;
+    SerialDebugBackend *debugBackend = nullptr;
 };
