@@ -10,16 +10,17 @@ ScrollView {
     ScrollBar.horizontal.policy: initialLayout.horOn ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
     ScrollBar.vertical.policy: initialLayout.verOn ? ScrollBar.AlwaysOn : ScrollBar.AlwaysOff
 
-    ColumnLayout {
+    Column {
         id: rightContent
         width: rightSection.width
+        height: rightArea.height
         spacing: 10
 
         // Debug
         Rectangle {
             id: debugRect
             width: parent.width - 20
-            height: 225
+            height: topSection.height * 0.45
             radius: 10
             border.color: "#a0a0a0"
             color: "white"
@@ -33,7 +34,58 @@ ScrollView {
                 Connections {
                     target: BLE
                     function onMessageReceived(message) {
-                        debugConsole.appendMessage(message)
+                        let buffer = message;
+                        let parts = [];
+                        let temp = "";
+                        let insideBraces = false;
+
+                        for (let i = 0; i < buffer.length; ++i) {
+                            let cha = buffer[i];
+
+                            if (cha === '{') {
+                                insideBraces = true;
+                            } else if (cha === '}') {
+                                insideBraces = false;
+                            }
+
+                            temp += cha;
+
+                            if (cha === '\n' && !insideBraces) {
+                                parts.push(temp.trim());
+                                temp = "";
+                            }
+                        }
+
+                        if (temp.length > 0) {
+                            parts.push(temp.trim());
+                        }
+
+                        for (let line of parts) {
+                            console.log("[Debug] 处理信息：", line);
+
+                            let pureMsg = line;
+                            let type = "unknown";
+
+                            if (line.startsWith("[底盘]")) {
+                                pureMsg = line.slice(4).trim();
+                                type = "chassis";
+                            } else if (line.startsWith("[避障]")) {
+                                pureMsg = line.slice(4).trim();
+                                type = "avoid";
+                            } else if (line.includes("估算时间")) {
+                                type = "chassis";
+                            } else if (line.includes("障碍") || line.includes("推理")) {
+                                type = "avoid";
+                            } else if (line.includes("{#00")) {
+                                type = "chassis";
+                            }
+
+                            if (type === "chassis") {
+                                debugConsole.appendChassis(pureMsg);
+                            } else if (type === "avoid") {
+                                debugConsole.appendAvoid(pureMsg);
+                            }
+                        }
                     }
 
                     function onCurrentMotionChanged() {
@@ -68,7 +120,7 @@ ScrollView {
         Rectangle {
             id: controlRect
             width: parent.width - 20
-            height: rightArea.height - debugRect.height - 10
+            height: topSection.height * 0.55 - 10
             radius: 10
             border.color: "#a0a0a0"
             color: "white"

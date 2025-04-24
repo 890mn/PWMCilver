@@ -86,14 +86,14 @@ Rectangle {
                 id: directionSelector
                 Layout.topMargin: 5
                 width: 80
-                model: ["Forward", "Backward", "Left", "Right"]
+                model: ["Forward", "Back", "Left", "Right", "LeftForward", "RightForward"]
             }
 
             FluComboBox {
                 id: distanceSelector
                 Layout.topMargin: 5
                 width: 80
-                model: ["10cm", "20cm", "50cm", "100cm"]
+                model: ["30cm", "100cm", "150cm", "200cm"]
             }
         }
 
@@ -115,7 +115,7 @@ Rectangle {
                 implicitHeight: font.pixelSize * 1.7
 
                 onClicked: {
-                    BLE.sendMessage("$STOP!")
+                    BLE.sendMessage("$STOPANY!")
                     console.log("急停！")
                 }
             }
@@ -137,8 +137,8 @@ Rectangle {
                     // 发送控制命令
                     let dir = directionSelector.currentText
                     let dis = distanceSelector.currentText
-                    BLE.sendMessage("@" + dir + dis)
-                    console.log("指令已发送:", "@" + dir + dis)
+                    BLE.sendMessage("@" + dir + dis + "!")
+                    console.log("指令已发送:", "@" + dir + dis+ "!")
                 }
             }
         }
