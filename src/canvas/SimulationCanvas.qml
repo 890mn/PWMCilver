@@ -109,7 +109,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: 18
         anchors.left: parent.left
-        anchors.leftMargin: 93
+        anchors.leftMargin: 123
         font.pixelSize: 18
         color: "#3a3a3a"
     }
@@ -120,7 +120,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: -18
         anchors.right: parent.right
-        anchors.rightMargin: 93
+        anchors.rightMargin: 123
         font.pixelSize: 18
         color: "#3a3a3a"
     }

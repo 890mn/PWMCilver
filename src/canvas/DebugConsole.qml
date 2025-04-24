@@ -20,6 +20,8 @@ Rectangle {
     property string currentMotion: "IDLE"
     property bool autoScroll: true
 
+    property string lastChassisInfo: ""
+
     signal clearRequested()
 
     ColumnLayout {
@@ -64,9 +66,8 @@ Rectangle {
                     implicitWidth: font.pixelSize * text.length * 0.65
                     implicitHeight: font.pixelSize * 1.3
                     onClicked: {
-                        chassisText.text = ""
                         avoidText.text = ""
-                        consoleRoot.clearRequested()
+                        avoidArea.clearRequested()
                     }
                 }
 
@@ -78,7 +79,8 @@ Rectangle {
             spacing: 4
             width: debugConsole.width - 15  // 控制宽度为整个窗口宽度的90%
             Layout.preferredHeight: (consoleRoot.height) / 3
-            Layout.alignment: Qt.AlignHCenter
+            Layout.alignment: Qt.AlignLeft
+            Layout.leftMargin: 15
 
             FluText {
                 text: "🛞 底盘信息"
@@ -87,26 +89,49 @@ Rectangle {
                 color: "#444"
             }
 
-            Flickable {
-                id: chassisArea
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                clip: true
-                interactive: true
-                contentWidth: chassisText.paintedWidth
-                contentHeight: chassisText.paintedHeight
+            ColumnLayout {
+                id: chassisInfoBox
+                spacing: 4
+                width: parent.width - 10
 
-                Text {
-                    id: chassisText
-                    x: 10
+                Row {
+                    spacing: 10
+                    FluText {
+                        text: "执行方向:"
+                        font.pixelSize: 17
+                        font.family: smileFont.name
+                        color: "#217aff"
+                    }
+                    FluText {
+                        id: directionLabel
+                        text: "-"
+                        font.pixelSize: 17
+                        font.family: smileFont.name
+                        color: "#333"
+                    }
+                    FluText {
+                        text: "估算时间:"
+                        font.pixelSize: 17
+                        font.family: smileFont.name
+                        color: "#217aff"
+                    }
+                    FluText {
+                        id: timeLabel
+                        text: "-"
+                        font.pixelSize: 17
+                        font.family: smileFont.name
+                        color: "#555"
+                    }
+                }
+
+                FluText {
+                    id: pwmCommandLabel
                     text: ""
                     wrapMode: Text.Wrap
-                    width: chassisArea.width - 6
-                    height: parent.height
-                    horizontalAlignment: Text.AlignLeft
+                    width: parent.width
+                    font.pixelSize: 15
                     font.family: smileFont.name
-                    font.pixelSize: 17
-                    textFormat: Text.RichText
+                    color: "#888"
                 }
             }
         }
@@ -188,14 +213,10 @@ Rectangle {
     }
 
     function appendLine(targetTextObj, msg) {
-        if (targetTextObj === chassisText) {
-            targetTextObj.text += msg + "<br>"
-        } else {
-            targetTextObj.text += msg
-        }
+        targetTextObj.text += msg
         if (consoleRoot.autoScroll) {
             Qt.callLater(() => {
-                let flickable = (targetTextObj === chassisText) ? chassisArea : avoidArea
+                let flickable = avoidArea
                 flickable.contentY = flickable.contentHeight - flickable.height - 25
             })
         }
@@ -209,44 +230,75 @@ Rectangle {
     }
 
     function appendChassis(msg) {
-        let now = new Date();
-        let timestamp = now.toLocaleTimeString();
+        // 如果是“执行方向”的部分
+        if (msg.includes("执行")) {
+            lastChassisInfo = msg
+            return
+        }
 
-        const regex = /执行\s+(\d+)\s+估算时间=([-\d]+)ms[\s\n]*({[^}]+})/;
-        const match = msg.match(regex);
+        // 如果是 PWM 指令部分，拼接上上次的执行信息
+        if (msg.includes("{#")) {
+            let combined = lastChassisInfo + "\n" + msg
+            lastChassisInfo = "" // 清空缓存，避免残留
+            handleFullChassisMessage(combined)
+            return
+        }
+
+        // 其它非结构化内容 fallback 处理
+        directionLabel.text = "-"
+        timeLabel.text = "-"
+        pwmCommandLabel.text = msg
+    }
+
+    // 提取核心内容的处理函数（支持完整结构的消息）
+    function handleFullChassisMessage(msg) {
+        const regex = /执行\s+(\d+)\s+估算时间=([-\d]+)ms[\s\n]*({[^}]+})?/;
+        const match = msg.match(regex)
 
         if (match) {
-            let directionCode = parseInt(match[1]);
-            let execTime = match[2];
-            let commandSet = match[3];
+            let directionCode = parseInt(match[1])
+            let execTime = match[2]
+            let commandSet = match[3] || "-"
 
             const directionMap = [
                 "停止", "前进", "后退", "左转", "右转",
                 "左前", "右前", "右中", "右中后",
                 "左中", "左中后"
-            ];
-            let directionName = directionMap[directionCode] || `未知(${directionCode})`;
+            ]
+            let directionName = directionMap[directionCode] || `未知(${directionCode})`
 
-            let formattedText =
-                colorText("[" + timestamp + "]", "#666") + " " +
-                colorText("[底盘]", "#217aff") + " " +
-                colorText(directionName, "#000") +
-                " | 估算时间: " + colorText(execTime + "ms", "#888");
-
-            appendLine(chassisText, formattedText)
-            appendLine(chassisText, colorText(commandSet, "#999"))
-
+            directionLabel.text = directionName
+            timeLabel.text = execTime + " ms"
+            pwmCommandLabel.text = commandSet
         } else {
-            let fallbackText =
-                colorText("[" + timestamp + "]", "#666") + " " +
-                colorText("[底盘]", "#217aff") + " " +
-                colorText(msg, "#666");
-            appendLine(chassisText, fallbackText)
+            directionLabel.text = "-"
+            timeLabel.text = "-"
+            pwmCommandLabel.text = msg
         }
     }
 
     function appendAvoid(msg) {
-        let formatted = formatMessage(msg, "avoid")
-        appendLine(avoidText, formatted)
+        const regex = /\s*执行方向=(\d+)\s+距离=(\d+)\s+时间=(\d+ms)/;
+        const match = msg.match(regex)
+        if (match) {
+            const directionMap = [
+                "停止", "前进", "后退", "左转", "右转",
+                "左前", "右前", "右中", "右中后",
+                "左中", "左中后"
+            ]
+
+            let dirNum = parseInt(match[1])
+            let directionText = directionMap[dirNum] || `未知(${dirNum})`
+            let distance = match[2]
+            let time = match[3]
+
+            let newMsg = `[避障] 执行方向=${directionText} 距离=${distance} 时间=${time}`
+            let formatted = formatMessage(newMsg, "avoid")
+            appendLine(avoidText, formatted)
+        } else {
+            // 非结构化避障信息走原来的路径
+            let formatted = formatMessage(msg, "avoid")
+            appendLine(avoidText, formatted)
+        }
     }
 }
