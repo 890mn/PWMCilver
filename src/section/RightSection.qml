@@ -61,8 +61,6 @@ ScrollView {
                         }
 
                         for (let line of parts) {
-                            console.log("[Debug] 处理信息：", line);
-
                             let pureMsg = line;
                             let type = "unknown";
 
